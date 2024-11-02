@@ -12,3 +12,21 @@ pom.xml.asc
 .lein-failures
 .nrepl-port
 .cpcache/
+# Compiler output
+target/
+out/
+
+# REPL and nREPL files
+*.nrepl/
+
+# Clojure tool configuration files
+deps.edn
+.edn
+
+# IDE specific files
+.idea/
+*.iml
+
+# Calva specific files
+.vscode/
+.clj-kondo/
