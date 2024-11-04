@@ -1,0 +1,9 @@
+{:source-paths ["src"]
+ :dependencies [[reagent "1.1.0"]
+                [thheller/shadow-cljs "2.19.11"]
+                [react "17.0.2"]
+                [react-dom "17.0.2"]]
+ :builds {:app {:target :browser
+                :output-dir "resources/public/js"
+                :asset-path "/js"
+                :modules {:app {:init-fn log-processor.core/init}}}}}

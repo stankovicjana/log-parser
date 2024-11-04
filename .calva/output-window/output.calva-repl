@@ -30,9 +30,14 @@ You can configure this with the setting:
   "calva.outputDestinations"
 
 
-; Connecting ...
-; Reading port file: file:///c%3A/Users/stank/OneDrive/Radna%20povr%C5%A1ina/lein%20project/.nrepl-port ...
-; Using host:port localhost:55575 ...
+; Jacking in...
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Starting Jack-in: pushd c:\Users\stank\OneDrive\Radna površina\lein project & cmd.exe /d /c lein update-in :dependencies conj [nrepl,"1.1.1"] -- update-in :plugins conj [cider/cider-nrepl,"0.47.1"] -- update-in [:repl-options,:nrepl-middleware] conj '["cider.nrepl/cider-middleware"]' -- repl :headless & popd
+; Using host:port 127.0.0.1:52035 ...
 ; Hooking up nREPL sessions ...
 ; Connected session: clj
 ; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
@@ -41,7 +46,68 @@ clj꞉user꞉> 
 "Please see https://calva.io/output/#about-stdout-in-the-repl-window
 about why stdout printed to this file is prepended with `;` to be line comments."
 clj꞉user꞉> 
-#'user/x
-clj꞉user꞉> x 
-5
+; Jack-in done.
+clj꞉user꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///c%3A/Users/stank/OneDrive/Radna%20povr%C5%A1ina/lein%20project/.nrepl-port ...
+; Using host:port localhost:52069 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉user꞉> 
+#'user/now
+clj꞉user꞉> 
+#'user/now
+clj꞉user꞉> 
+{:era #object[java.time.chrono.IsoEra 0x5b14604e "CE"], :monthValue 11, :leapYear true, :month #object[java.time.Month 0x7451aa60 "NOVEMBER"], :dayOfMonth 4, :year 2024, :chronology #object[java.time.chrono.IsoChronology 0x5e54700f "ISO"], :class java.time.LocalDate, :dayOfWeek #object[java.time.DayOfWeek 0x3a5f004b "MONDAY"], :dayOfYear 309}
+clj꞉user꞉> 
+; Execution error (IllegalArgumentException) at user/eval2409 (form-init1649674722608153245.clj:45).
+; Don't know how to create ISeq from: java.time.LocalDate
+clj꞉user꞉> 
+{:era #object[java.time.chrono.IsoEra 0x5b14604e "CE"], :monthValue 11, :leapYear true, :month #object[java.time.Month 0x7451aa60 "NOVEMBER"], :dayOfMonth 4, :year 2024, :chronology #object[java.time.chrono.IsoChronology 0x5e54700f "ISO"], :class java.time.LocalDate, :dayOfWeek #object[java.time.DayOfWeek 0x3a5f004b "MONDAY"], :dayOfYear 309}
+clj꞉user꞉> 
+; Execution error (IllegalArgumentException) at user/eval2413 (form-init1649674722608153245.clj:45).
+; Don't know how to create ISeq from: java.time.LocalDate
+clj꞉user꞉> 
+#'user/now
+clj꞉user꞉> 
+; Syntax error compiling at (c:\Users\stank\OneDrive\Radna površina\lein project\ex.clj:41:1).
+; Unable to resolve symbol: prirodni-skup in this context
+clj꞉user꞉> 
+; #object[clojure.lang.Var$Unbound 0x616e54ba Unbound: #'user/prirodni-skup]
+; Syntax error compiling at (c:\Users\stank\OneDrive\Radna površina\lein project\ex.clj:40:20).
+; Unable to resolve symbol: prirodni-brojevi in this context
+clj꞉user꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///c%3A/Users/stank/OneDrive/Radna%20povr%C5%A1ina/lein%20project/.nrepl-port ...
+; Using host:port localhost:52174 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉user꞉> 
+; Syntax error compiling at (c:\Users\stank\OneDrive\Radna površina\lein project\ex.clj:47:1).
+; Unable to resolve symbol: now in this context
+clj꞉user꞉> 
+; Execution error (IllegalArgumentException) at user/eval2400 (form-init5433808797896023253.clj:46).
+; Don't know how to create ISeq from: java.time.LocalDate
+clj꞉user꞉> 
+{:era #object[java.time.chrono.IsoEra 0x76054aa9 "CE"], :monthValue 11, :leapYear true, :month #object[java.time.Month 0x38276634 "NOVEMBER"], :dayOfMonth 4, :year 2024, :chronology #object[java.time.chrono.IsoChronology 0x569edc4 "ISO"], :class java.time.LocalDate, :dayOfWeek #object[java.time.DayOfWeek 0x57ce9756 "MONDAY"], :dayOfYear 309}
 clj꞉user꞉> 
