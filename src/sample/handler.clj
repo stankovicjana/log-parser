@@ -2,6 +2,7 @@
    (:require [compojure.core :refer [defroutes GET POST]]
              [ring.middleware.multipart-params :refer [wrap-multipart-params]]
              [ring.util.response :refer [response]]
+             [ring.middleware.resource :refer [wrap-resource]]
              [sample.parser :refer [logs process-logfile]]
              [sample.views.home :refer [home-page]]))
   
@@ -18,4 +19,5 @@
   
   (def app
     (-> app-routes
+        (wrap-resource "public" )      
         (wrap-multipart-params)))
