@@ -43,7 +43,7 @@ body {
 
 .sidebar {
     width: 15%; 
-    background-color: #d5ddbc; 
+    background-color: #f4f4f4; 
     padding: 15px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
@@ -74,4 +74,31 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+input[type="file"]{
+    display: inline-block;
+    background-color: #e7e7e7;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}   
+button {
+    background-color: #636e49; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #636e49; 
+}
+table{
+  margin-top: 30px;
 }

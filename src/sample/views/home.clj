@@ -5,20 +5,17 @@
 (defn home-page []
   (html5
    [:head
-    [:title "Upload Logs"]
+    [:title "My Profile"]
     (include-css "/css/style.css")]
    [:body
     [:nav
      [:ul
-      [:li (link-to "/" "Home")]
-      [:li (link-to "/upload" "Upload file")]]]
+      [:li (link-to "/" "My profile")]
+      [:li (link-to "/" "Logout")]]]
     [:div {:class "container"}
-     [:div {:class "sidebar"} 
+     [:div {:class "sidebar"}
       [:ul
-       [:li (link-to "/" "Home")]
-       [:li (link-to "/upload" "Upload file")]]]
-     [:div {:class "content"} 
-      [:h2 "Upload your file here:"]
-      [:form {:action "/upload" :method "post" :enctype "multipart/form-data"}
-       [:input {:type "file" :name "file"}]
-       [:input {:type "submit" :value "Upload"}]]]]]))
+       [:li (link-to "/upload" "Upload file")]
+       [:li (link-to "/report" "Generate report")]]]
+     [:div {:class "content"}
+      [:h2 "My profile"]]]]))
