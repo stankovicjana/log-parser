@@ -1,15 +1,25 @@
 (ns sample.parser
   (:require [clojure.java.io :as io]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [clojure.edn :as edn]))
 
 (defn logfile-lines [filename]
   (string/split-lines (slurp filename)))
 
-(defn contains-error? [line]
-  (re-find #"(?i)error" line))
+
+(defn parse-line [line]
+  (let [regex #"(.*)\s+\[(.*)\]\s+(.*)"  
+        match (re-matches regex line)]
+    (if match
+      {:timestamp (string/trim (nth match 1))  
+       :owner (string/trim (nth match 2))     
+       :message (string/trim (nth match 3))}  
+      nil)))  
 
 (defn parse-lines [lines]
-  (filter contains-error? lines))
+  (->> lines
+       (map parse-line)  
+       (filter some?)))  
 
 (defn process-logfile [filename]
   (parse-lines (logfile-lines filename)))
