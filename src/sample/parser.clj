@@ -11,10 +11,12 @@
   (let [regex #"(.*)\s+\[(.*)\]\s+(.*)"  
         match (re-matches regex line)]
     (if match
-      {:timestamp (string/trim (nth match 1))  
-       :owner (string/trim (nth match 2))     
-       :message (string/trim (nth match 3))}  
-      nil)))  
+      (let [owner (string/trim (nth match 2))]
+        {:timestamp (string/trim (nth match 1))
+         :owner owner
+         :message (string/trim (nth match 3))
+         :error (string/includes? (string/lower-case owner) "error")})
+      nil)))
 
 (defn parse-lines [lines]
   (->> lines
