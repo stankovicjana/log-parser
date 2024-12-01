@@ -2,7 +2,10 @@
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.12.0"]
                  [compojure "1.7.1"]
-                 [ring/ring-defaults "0.3.4"]]
+                 [ring/ring-defaults "0.3.4"]
+                 [midje "1.10.10"]
+                 [org.clojure/tools.trace "0.7.11"]]
+
   :plugins [[lein-ring "0.12.5"]]
             :ring {:handler sample.handler/app
                    :init sample.handler/init}
