@@ -8,7 +8,16 @@
             [sample.views.report :refer [report-page]]
             [sample.views.upload :refer [upload-page]]
             [cheshire.core :as json]
-            [clojure.tools.trace :as trace]))
+            [clojure.tools.trace :as trace]
+            [migratus.core :as migratus]))
+
+(def migratus-config
+  {:store :database
+   :migration-dir "migrations"
+   :db (or (System/getenv "DATABASE_PARSER") "postgresql://localhost:5432/parser")})
+
+(defn init []
+  (migratus/migrate migratus-config))
 
 (trace/trace-vars #'sample.parser/process-logfile)
 

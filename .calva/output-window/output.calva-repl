@@ -111,3 +111,84 @@ clj꞉user꞉> 
 clj꞉user꞉> 
 {:era #object[java.time.chrono.IsoEra 0x76054aa9 "CE"], :monthValue 11, :leapYear true, :month #object[java.time.Month 0x38276634 "NOVEMBER"], :dayOfMonth 4, :year 2024, :chronology #object[java.time.chrono.IsoChronology 0x569edc4 "ISO"], :class java.time.LocalDate, :dayOfWeek #object[java.time.DayOfWeek 0x57ce9756 "MONDAY"], :dayOfYear 309}
 clj꞉user꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:62982 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉user꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:5:1).
+; Unable to resolve symbol: fact in this context
+clj꞉user꞉> 
+; Syntax error macroexpanding clojure.core/ns at (d:\FON\MASTER\log-parser\test\sample\tests.clj:1:1).
+; :test - failed: simple-symbol? at: [:ns-name] spec: :clojure.core.specs.alpha/ns-form
+; 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:5:1).
+; Unable to resolve symbol: fact in this context
+clj꞉user꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:63003 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:5:1).
+; Unable to resolve symbol: fact in this context
+clj꞉user꞉> 
+
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:63046 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+; Syntax error (ClassNotFoundException) compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:1:1466).
+; idje.sweet
+; 
+; Syntax error reading source at (REPL:2:38).
+; Unmatched delimiter: ]
+clj꞉user꞉> 
+; Syntax error macroexpanding clojure.core/ns at (d:\FON\MASTER\log-parser\test\sample\tests.clj:1:1).
+; :test - failed: simple-symbol? at: [:ns-name] spec: :clojure.core.specs.alpha/ns-form
+; 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:4:1).
+; Unable to resolve symbol: fact in this context
+clj꞉user꞉> 
+true
+clj꞉sample.test꞉> 
+true
+clj꞉sample.test꞉> 
+true
+clj꞉sample.test꞉> 
+true
+clj꞉sample.test꞉> 
+true
+clj꞉sample.test꞉> 
+true
+clj꞉sample.test꞉> 
+true
+clj꞉sample.test꞉> 

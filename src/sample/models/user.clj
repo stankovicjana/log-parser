@@ -1,0 +1,2 @@
+(ns sample.models.user)
+ 
