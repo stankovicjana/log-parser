@@ -4,7 +4,7 @@
             [ring.util.response :refer [response]]
             [ring.middleware.resource :refer [wrap-resource]]
             [sample.parser :refer [process-logfile]]
-            [sample.views.home :refer [home-page]]
+            [sample.views.home :as view]
             [sample.views.report :refer [report-page]]
             [sample.views.upload :refer [upload-page]]
             [sample.routes.auth :refer [auth-routes]]
@@ -26,6 +26,9 @@
             logs (process-logfile filename)]
         (response (json/generate-string logs)))
       (response {:error "No file provided"}))))
+
+(defn home-page [& [email errors]]
+    (view/home-page email errors))  
 
 (defroutes app-routes
   (GET "/" [] (home-page))

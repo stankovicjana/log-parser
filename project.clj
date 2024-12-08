@@ -9,7 +9,8 @@
                  [org.clojure/java.jdbc "0.7.12"] 
                  [migratus "1.3.5"] 
                  [ring/ring-mock "0.4.0"]
-                 [com.draines/postal "2.0.5"]]
+                 [com.draines/postal "2.0.5"]
+                 [funcool/struct "1.4.0"]]
 
   :plugins [[lein-ring "0.12.5"]
             [migratus-lein "0.5.0"]]

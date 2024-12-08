@@ -10,7 +10,7 @@
    [:body
     [:nav
      [:ul
-      [:li (link-to "/" "My profile")]
+      [:li (link-to "/" "Home")]
       [:li (link-to "/" "Logout")]]]
     [:div {:class "container"}
      [:div {:class "sidebar"}
