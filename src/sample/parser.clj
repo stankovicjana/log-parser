@@ -3,9 +3,9 @@
             [clojure.string :as string]
             [clojure.edn :as edn]))
 
+;slurp čita sadržaj fajla kao jedan veliki string
 (defn logfile-lines [filename]
   (string/split-lines (slurp filename)))
-
 
 (defn parse-line [line]
   (let [regex #"(.*)\s+\[(.*)\]\s+(.*)"  
@@ -18,6 +18,9 @@
          :error (string/includes? (string/lower-case owner) "error")})
       nil)))
 
+;->> je threading operator koji omogućava lakše čitanje sekvencijalnih transformacija.
+;map parse-line primenjuje funkciju parse-line na svaku liniju.
+;filter ? uklanja nil vrednosti, ostavljajući samo uspešno parsirane linije.
 (defn parse-lines [lines]
   (->> lines
        (map parse-line)  

@@ -1,14 +1,14 @@
 (ns sample.handler
-  (:require [compojure.core :refer [defroutes GET POST]]
+  (:require [compojure.core :refer [defroutes GET POST routes]]
             [ring.middleware.multipart-params :refer [wrap-multipart-params]]
             [ring.util.response :refer [response]]
             [ring.middleware.resource :refer [wrap-resource]]
-            [sample.parser :refer [logs process-logfile]]
+            [sample.parser :refer [process-logfile]]
             [sample.views.home :refer [home-page]]
             [sample.views.report :refer [report-page]]
             [sample.views.upload :refer [upload-page]]
+            [sample.routes.auth :refer [auth-routes]]
             [cheshire.core :as json]
-            [clojure.tools.trace :as trace]
             [migratus.core :as migratus]))
 
 (def migratus-config
@@ -19,17 +19,13 @@
 (defn init []
   (migratus/migrate migratus-config))
 
-(trace/trace-vars #'sample.parser/process-logfile)
-
 (defn upload-file-handler [request]
-  (trace/trace "Request params:" (get-in request [:params "file"]))
   (let [file (get-in request [:params "file"])]
-    (if file
+    (if (some? file)
       (let [filename (:tempfile file)
             logs (process-logfile filename)]
-        (trace/trace "Processed logs:" logs) 
         (response (json/generate-string logs)))
-      (response (json/generate-string [])))))
+      (response {:error "No file provided"}))))
 
 (defroutes app-routes
   (GET "/" [] (home-page))
@@ -38,6 +34,6 @@
   (POST "/uploadFile" request (upload-file-handler request)))
 
 (def app
-  (-> app-routes
+  (-> (routes app-routes auth-routes)
       (wrap-resource "public")
       (wrap-multipart-params)))
