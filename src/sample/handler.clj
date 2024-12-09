@@ -1,15 +1,17 @@
 (ns sample.handler
-  (:require [compojure.core :refer [defroutes GET POST routes]]
-            [ring.middleware.multipart-params :refer [wrap-multipart-params]]
-            [ring.util.response :refer [response]]
-            [ring.middleware.resource :refer [wrap-resource]]
-            [sample.parser :refer [process-logfile]]
-            [sample.views.home :as view]
-            [sample.views.report :refer [report-page]]
-            [sample.views.upload :refer [upload-page]]
-            [sample.routes.auth :refer [auth-routes]]
-            [cheshire.core :as json]
-            [migratus.core :as migratus]))
+  (:require
+   [cheshire.core :as json]
+   [compojure.core :refer [defroutes GET POST routes]]
+   [migratus.core :as migratus]
+   [ring.middleware.multipart-params :refer [wrap-multipart-params]]
+   [ring.middleware.params :refer [wrap-params]]
+   [ring.middleware.resource :refer [wrap-resource]]
+   [ring.util.response :refer [response]]
+   [sample.parser :refer [process-logfile]]
+   [sample.routes.auth :refer [auth-routes]]
+   [sample.views.home :as view]
+   [sample.views.report :refer [report-page]]
+   [sample.views.upload :refer [upload-page]]))
 
 (def migratus-config
   {:store :database
@@ -38,5 +40,6 @@
 
 (def app
   (-> (routes app-routes auth-routes)
+      (wrap-params)
       (wrap-resource "public")
       (wrap-multipart-params)))
