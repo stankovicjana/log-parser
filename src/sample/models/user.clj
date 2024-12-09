@@ -9,3 +9,8 @@
 (defn get-all-users []
   (sql/query db
              ["SELECT * FROM users"]))
+
+(defn get-user-by-id [id]
+  (sql/query db
+             ["SELECT * FROM users WHERE id = ?", id]
+             {:result-set-fn first}))

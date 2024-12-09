@@ -9,7 +9,7 @@
    [ring.util.response :refer [response]]
    [sample.parser :refer [process-logfile]]
    [sample.routes.auth :refer [auth-routes]]
-   [sample.views.home :as view]
+   [sample.routes.home :refer [home-routes]]
    [sample.views.report :refer [report-page]]
    [sample.views.upload :refer [upload-page]]))
 
@@ -29,17 +29,15 @@
         (response (json/generate-string logs)))
       (response {:error "No file provided"}))))
 
-(defn home-page [& [email errors]]
-    (view/home-page email errors))  
-
 (defroutes app-routes
-  (GET "/" [] (home-page))
   (GET "/report" [] (report-page))
   (GET "/upload" [] (upload-page))
-  (POST "/uploadFile" request (upload-file-handler request)))
+  (POST "/uploadFile" request (upload-file-handler request))
+  auth-routes
+  home-routes)
 
 (def app
-  (-> (routes app-routes auth-routes)
+  (-> (routes app-routes)
       (wrap-params)
       (wrap-resource "public")
       (wrap-multipart-params)))

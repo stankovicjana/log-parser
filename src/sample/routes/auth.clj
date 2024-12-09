@@ -20,10 +20,9 @@
    :user-email (:email user)})
 
 (defn handle-login [email password]
-  (println "Received login request with email:" email "and password:" password)
   (let [user (db/get-user-by-email email)]
     (if (and user (crypt/verify password (:encrypted_password user)))
-      (response/redirect "/")
+      (assoc (response/redirect "/") :session (user-to-session user))
       (login-page email {:email "Email or password is invalid"}))))
 
 (defroutes auth-routes

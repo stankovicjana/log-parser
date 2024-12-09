@@ -6,6 +6,9 @@
              [hiccup.element :refer :all]
              [hiccup.form :refer [label]]))
 
+(defn get-user [id]
+  (if id
+    (user-db/get-user-by-id id)))
 
 (defn error-item [error]
   [:div.text-danger error])

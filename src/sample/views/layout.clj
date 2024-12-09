@@ -8,15 +8,13 @@
      [:a {:class "login" :href "/login"} "Login"]]
     [:li
      [:a {:class "Register" :href "/register"} "Register"]]]))
-
 (defn user-menu [user]
   (list
    [:ul {:class "nav navbar-nav navbar-right"}
     [:li
-     [:a {:class "profile" :href "/profile"} "Profile"]]
+     [:a {:class "trace" :href "/trace"} "Trace files"]]
     [:li
      [:a {:class "logout" :href "/logout"} "Logout"]]]))
-
 (defn base [& content]
   (html5
    [:head
@@ -25,17 +23,22 @@
     [:meta {:name "keywords" :content "images pictures"}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
     [:title "Sample application"]
-    [:link {:rel "icon" :href "/img/favicon.ico" :type "image/x-icon"}]]
-   [:body content]))
-
+    (include-css "/css/style.css")
+    ]
+   [:body content])) 
 (defn common [& [content user]]
   (base
-   [:header.navbar.navbar-default.navbar-static-top.navbar-default
-    [:div.container
+   [:header.navbar.navbar-default.navbar-static-top
+    [:nav
      [:div.navbar-header
-      [:a.navbar-brand {:href "/"}
-       [:strong "sample"]]]
+      [:a.navbar-brand {:href "/" :class "navbar-link"} ""]]
      (if user
-       (user-menu user)
-       (guest-menu))]]
-   [:div.container content]))
+       (user-menu user)  
+       (guest-menu))]]  
+   [:div.container
+    [:div {:class "container"}
+     [:div {:class "sidebar"}
+      [:ul
+       [:li (link-to "/upload" "Upload file")]
+       [:li (link-to "/report" "Generate report")]]]
+     [:div {:class "col-md-9 content"} content]]]))
