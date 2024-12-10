@@ -6,9 +6,11 @@
    [:div.content
     [:h2 "Upload your file here:"]
     [:form {:id "upload-form" :action "/upload" :method "post" :enctype "multipart/form-data"}
-     [:label {:for "file-upload" :class "custom-file-upload"} "Choose File"]
-     [:input {:id "file-upload" :type "file" :name "file"}]
-     [:button {:type "submit"} "Upload file"]]
+     [:div
+      [:input {:id "file-upload" :type "file" :name "file" :style "display:none;"}]
+      [:label {:for "file-upload" :class "custom-file-upload"} "Choose File"]
+      [:span {:id "file-name"} "No file chosen"]  
+      [:button {:type "submit"} "Upload file"]]]
     [:div {:id "result"}]
     [:h3 "Log Data"]
     [:table {:border "1" :cellspacing "0" :cellpadding "5"}

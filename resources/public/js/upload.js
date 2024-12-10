@@ -44,3 +44,8 @@ document.getElementById('upload-form').onsubmit = function(event) {
     xhr.send(formData);
   };
   
+  document.getElementById('file-upload').addEventListener('change', function(event) {
+    var fileName = event.target.files.length > 0 ? event.target.files[0].name : "No file chosen";
+    document.getElementById('file-name').textContent = fileName;
+  });
+  
