@@ -23,8 +23,9 @@
 (defn handle-login [email password]
   (let [user (db/get-user-by-email email)]
     (if (and user (crypt/verify password (:encrypted_password user)))
-      (assoc (response/redirect "/") :session (user-to-session user))
+      (assoc (response/redirect "/upload") :session (user-to-session user))
       (login-page email {:email "Email or password is invalid"}))))
+
 
 (defn handle-logout []
   (assoc (response/redirect "/") :session nil))
@@ -58,10 +59,9 @@
                                      {:from (System/getenv "SMTP_FROM")
                                       :to (:email user)
                                       :subject "Account Registration"
-                                      :body "You succefully created an account"})))
+                                      :body "You successfully created an account"})))
             (assoc (response/redirect "/") :session (user-to-session user))))))))
 
-  
 (defroutes auth-routes
   (GET "/login" [] (login-page))
   (GET "/logout" []
@@ -72,5 +72,5 @@
     (handle-login email password))
   (POST "/register" [name email password password-confirmation]
     (handle-registration name email password password-confirmation)))
-  (GET "/users" []
-    (response/response (db/get-all-users)))
+(GET "/users" []
+  (response/response (db/get-all-users)))
