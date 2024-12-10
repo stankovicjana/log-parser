@@ -9,23 +9,25 @@
     [:li
      [:a {:class "Register" :href "/register"} "Register"]]]))
 (defn user-menu [user]
-  (list
-   [:ul {:class "nav navbar-nav navbar-right"}
-    [:li
-     [:a {:class "trace" :href "/trace"} "Trace files"]]
-    [:li
-     [:a {:class "logout" :href "/logout"} "Logout"]]]))
+  [:ul {:class "nav navbar-nav navbar-right"}
+   [:li
+    [:a {:class "trace" :href "/trace"} "Trace files"]]
+   [:li
+    [:a {:class "upload" :href "/upload"} "Upload and parse file"]]
+   [:li
+    [:a {:class "logout" :href "/logout"} "Logout"]]])
 (defn base [& content]
   (html5
    [:head
     [:meta {:http-equiv "content-type" :content "text/html; charset=UTF-8"}]
-    [:meta {:name "description" :content "Sample application"}]
+    [:meta {:name "description" :content "Parsing files and tracing application"}]
     [:meta {:name "keywords" :content "images pictures"}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
-    [:title "Sample application"]
+    [:title "Parsing files and tracing application"]
     (include-css "/css/style.css")
     ]
-   [:body content])) 
+   [:body content]
+   )) 
 (defn common [& [content user]]
   (base
    [:header.navbar.navbar-default.navbar-static-top
@@ -33,12 +35,8 @@
      [:div.navbar-header
       [:a.navbar-brand {:href "/" :class "navbar-link"} ""]]
      (if user
-       (user-menu user)  
-       (guest-menu))]]  
-   [:div.container
-    [:div {:class "container"}
-     [:div {:class "sidebar"}
-      [:ul
-       [:li (link-to "/upload" "Upload file")]
-       [:li (link-to "/report" "Generate report")]]]
-     [:div {:class "col-md-9 content"} content]]]))
+       (do
+         (user-menu user)) 
+       (guest-menu))]]
+   [:div {:class "col-md-9 content"} content]
+   (include-js "/js/upload.js")))
