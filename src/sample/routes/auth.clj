@@ -7,13 +7,17 @@
    [sample.crypt :as crypt]
    [sample.helpers :refer :all]
    [sample.models.user :as db]
-   [sample.views.auth :as view :refer [registration-page]]
    [sample.views.layout :as layout]
+   [sample.views.auth :as view]
    [struct.core :as st]))
 
 (defn login-page [& [email errors]]
   (layout/common
    (view/login-page email errors)))
+
+(defn registration-page [& [email errors]]
+  (layout/common
+   (view/registration-page email errors))) 
 
 (defn user-to-session [user]
   {:user-id (:id user)
@@ -25,7 +29,6 @@
     (if (and user (crypt/verify password (:encrypted_password user)))
       (assoc (response/redirect "/upload") :session (user-to-session user))
       (login-page email {:email "Email or password is invalid"}))))
-
 
 (defn handle-logout []
   (assoc (response/redirect "/") :session nil))
@@ -51,7 +54,7 @@
         (do
           (db/create-user {:name name :email email :encrypted_password (crypt/encrypt password)})
           (let [user (db/get-user-by-email email)]
-            (if (System/getenv "SMTP_FROM")
+            (when (System/getenv "SMTP_FROM")
               (println (send-message {:user (System/getenv "SMTP_USER")
                                       :pass (System/getenv "SMTP_PASSWORD")
                                       :host (System/getenv "SMTP_HOST")
@@ -64,13 +67,10 @@
 
 (defroutes auth-routes
   (GET "/login" [] (login-page))
-  (GET "/logout" []
-    (handle-logout))
-  (GET "/register" []
-    (registration-page))
-  (POST "/login" [email password]
-    (handle-login email password))
+  (GET "/logout" [] (handle-logout))
+  (GET "/register" [] (registration-page))
+  (POST "/login" [email password] (handle-login email password))
   (POST "/register" [name email password password-confirmation]
-    (handle-registration name email password password-confirmation)))
-(GET "/users" []
-  (response/response (db/get-all-users)))
+    (handle-registration name email password password-confirmation))
+  (GET "/users" []
+    (response/response (db/get-all-users)))) 

@@ -38,5 +38,5 @@
        (do
          (user-menu user)) 
        (guest-menu))]]
-   [:div {:class "col-md-9 content"} content]
+   [:div {:class ""} content]
    (include-js "/js/upload.js")))

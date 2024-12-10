@@ -9,7 +9,6 @@
    [ring.middleware.session :refer [wrap-session]]
    [ring.util.response :as response]
    [sample.helpers :refer [get-user]]
-   [sample.middleware.auth :refer [wrap-authentication]]
    [sample.parser :refer [process-logfile]]
    [sample.routes.auth :refer [auth-routes login-page]]
    [sample.routes.home :refer [home-routes]]

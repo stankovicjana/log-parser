@@ -16,7 +16,6 @@
              (submit-button {:class "btn btn-success"} "Login"))])
 
 (defn registration-page [& [name email errors]]
-  (html
    [:div.registration-form
     [:h1 "Create an account"]
     (form-to [:post "/register"]
@@ -24,4 +23,4 @@
              (input-control text-field "email" "Email" email true (:email errors))
              (input-control password-field "password" "Password" nil true (:password errors))
              (input-control password-field "password-confirmation" "Repeat password" nil true (:password-confirmation errors))
-             (submit-button {:class "btn btn-success"} "Create account"))]))
+             (submit-button {:class "btn btn-success"} "Create account"))])
