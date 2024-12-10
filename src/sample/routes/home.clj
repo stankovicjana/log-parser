@@ -10,3 +10,4 @@
 (defroutes home-routes
   (GET "/" {{:keys [user-id]} :session}
        (home (get-user user-id))))
+  

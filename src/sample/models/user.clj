@@ -14,3 +14,6 @@
   (sql/query db
              ["SELECT * FROM users WHERE id = ?", id]
              {:result-set-fn first}))
+
+(defn create-user [user]
+  (sql/insert! db :users user))

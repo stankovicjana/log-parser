@@ -7,7 +7,7 @@
     [:li
      [:a {:class "login" :href "/login"} "Login"]]
     [:li
-     [:a {:class "Register" :href "/register"} "Register"]]]))
+     [:a {:class "register" :href "/register"} "Register"]]]))
 (defn user-menu [user]
   [:ul {:class "nav navbar-nav navbar-right"}
    [:li
