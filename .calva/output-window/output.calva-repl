@@ -192,3 +192,75 @@ true
 clj꞉sample.test꞉> 
 true
 clj꞉sample.test꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:50458 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉user꞉> 
+; Execution error (AuthenticationFailedException) at com.sun.mail.smtp.SMTPTransport$Authenticator/authenticate (SMTPTransport.java:947).
+; 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [VI1P191CA0011.EURP191.PROD.OUTLOOK.COM 2024-12-11T15:34:09.069Z 08DD19B5C96598D3]
+; 
+clj꞉sample.test꞉> 
+#'sample.test/send-test-email
+clj꞉sample.test꞉> 
+; Execution error (AuthenticationFailedException) at com.sun.mail.smtp.SMTPTransport$Authenticator/authenticate (SMTPTransport.java:947).
+; 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [VI1P191CA0003.EURP191.PROD.OUTLOOK.COM 2024-12-11T15:34:18.690Z 08DD19AC38B8AA4B]
+; 
+clj꞉sample.test꞉> 
+#'test/send-test-email
+clj꞉test꞉> 
+; Execution error (AuthenticationFailedException) at com.sun.mail.smtp.SMTPTransport$Authenticator/authenticate (SMTPTransport.java:947).
+; 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [VI1PR08CA0264.eurprd08.prod.outlook.com 2024-12-11T15:37:12.742Z 08DD198F737FFC39]
+; 
+clj꞉test꞉> 
+; Execution error (AuthenticationFailedException) at com.sun.mail.smtp.SMTPTransport$Authenticator/authenticate (SMTPTransport.java:947).
+; 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [VI1PR07CA0137.eurprd07.prod.outlook.com 2024-12-11T15:51:26.428Z 08DD15BA6B907F6B]
+; 
+clj꞉test꞉> 
+; Execution error (AuthenticationFailedException) at com.sun.mail.smtp.SMTPTransport$Authenticator/authenticate (SMTPTransport.java:947).
+; 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [VI1PR09CA0159.eurprd09.prod.outlook.com 2024-12-11T16:07:31.407Z 08DD19BB513FCB79]
+; 
+clj꞉test꞉> 
+#'test/send-test-email
+clj꞉test꞉> 
+; Execution error (AuthenticationFailedException) at com.sun.mail.smtp.SMTPTransport$Authenticator/authenticate (SMTPTransport.java:947).
+; 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [VI1PR09CA0174.eurprd09.prod.outlook.com 2024-12-11T16:07:51.360Z 08DD18AE63F33303]
+; 
+clj꞉test꞉> 
+#'test/send-test-email
+clj꞉test꞉> 
+; Execution error (AuthenticationFailedException) at com.sun.mail.smtp.SMTPTransport$Authenticator/authenticate (SMTPTransport.java:947).
+; 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [VI1PR04CA0080.eurprd04.prod.outlook.com 2024-12-11T16:08:19.923Z 08DD19B2FE18C51D]
+; 
+clj꞉test꞉> 
+#'test/send-test-email
+clj꞉test꞉> 
+; Execution error (MessagingException) at com.sun.mail.smtp.SMTPTransport/openServer (SMTPTransport.java:2198).
+; Got bad greeting from SMTP host: smtp.mail.yahoo.com, port: 465, response:  Z  
+; 
+clj꞉test꞉> 
+; Execution error (MessagingException) at com.sun.mail.smtp.SMTPTransport/openServer (SMTPTransport.java:2198).
+; Got bad greeting from SMTP host: smtp.mail.yahoo.com, port: 465, response:  Z  
+; 
+clj꞉test꞉> 
+#'test/send-test-email
+clj꞉test꞉> 
+; Execution error (AuthenticationFailedException) at com.sun.mail.smtp.SMTPTransport$Authenticator/authenticate (SMTPTransport.java:947).
+; 535 5.7.0 (#AUTH005) Too many bad auth attempts.
+; 
+clj꞉test꞉> 
+#'test/send-test-email
+clj꞉test꞉> 
+{:code 0, :error :SUCCESS, :message "messages sent"}
+clj꞉test꞉> 

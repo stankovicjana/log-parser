@@ -3,4 +3,7 @@
             [hiccup.element :refer [link-to]]))
 
 (defn trace-page [user]
+  [:div.content
+   [:h2 "Choose the log you want to trace:"]
+    ]
 )

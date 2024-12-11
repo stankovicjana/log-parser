@@ -56,9 +56,10 @@
           (let [user (db/get-user-by-email email)]
             (when (System/getenv "SMTP_FROM")
               (println (send-message {:user (System/getenv "SMTP_USER")
-                                      :pass (System/getenv "SMTP_PASSWORD")
+                                      :pass (System/getenv "SMTP_APP_PASSWORD")
                                       :host (System/getenv "SMTP_HOST")
-                                      :port 587}
+                                      :port 587
+                                      :tls true}
                                      {:from (System/getenv "SMTP_FROM")
                                       :to (:email user)
                                       :subject "Account Registration"
