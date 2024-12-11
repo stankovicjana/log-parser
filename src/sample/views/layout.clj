@@ -39,4 +39,5 @@
          (user-menu user)) 
        (guest-menu))]]
    [:div {:class ""} content]
-   (include-js "/js/upload.js")))
+   (include-js "/js/upload.js")
+   (include-js "/js/trace.js")))
