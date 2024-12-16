@@ -1,5 +1,4 @@
-(ns sample.views.upload
-  ) 
+(ns sample.views.upload) 
 
 (defn upload-page [user]
   [:div.content
@@ -15,7 +14,14 @@
    [:table {:border "1" :cellspacing "0" :cellpadding "5"}
     [:thead
      [:tr
+      [:th "Select"]
       [:th "Timestamp"]
       [:th "Owner"]
       [:th "Message"]]]
-    [:tbody {:id "log-table-body"}]]])
+    [:tbody {:id "log-table-body"}]]
+   [:div {:class "sendLogs" :style "display:none;"}
+   [:h2 "Share your insights"]
+   [:p "Enter email to share selected log info."]
+   [:input {:type "text" :id "custom-textbox" :placeholder "Enter email"}]
+   [:button {:type "button" :id "custom-button"} "Send"]]
+   ])
