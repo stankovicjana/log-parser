@@ -114,6 +114,7 @@ document.getElementById('custom-button').addEventListener('click', function() {
       xhr.onload = function() {
         if (xhr.status === 200) {
           alert('Email sent successfully!');
+          document.getElementById('custom-textbox').value = '';
         } else {
           alert('Failed to send email.');
         }

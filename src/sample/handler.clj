@@ -1,8 +1,12 @@
 (ns sample.handler
+  #_{:clj-kondo/ignore [:duplicate-require]}
   (:require
    [cheshire.core :as json]
+   [clojure.data.json :as jsonData]
+   [clojure.tools.logging :as log]
    [clojure.tools.trace :as trace]
-   [compojure.core :refer [defroutes GET POST routes context]]
+   [compojure.core :refer [context defroutes GET POST routes]]
+   [postal.core :as postal]
    [ring.middleware.multipart-params :refer [wrap-multipart-params]]
    [ring.middleware.params :refer [wrap-params]]
    [ring.middleware.resource :refer [wrap-resource]]
@@ -10,14 +14,12 @@
    [ring.util.response :as response]
    [sample.helpers :refer [get-user]]
    [sample.parser :refer [process-logfile]]
-   [sample.routes.auth :refer [auth-routes login-page]]
+   [sample.routes.auth :refer [auth-routes]]
    [sample.routes.home :refer [home-routes]]
+   [sample.helpers :refer [send-email-with-attachment]]
    [sample.views.layout :as layout]
    [sample.views.trace :as view]
-   [sample.views.upload :refer [upload-page]]
-   [clojure.data.json :as jsonData]
-   [clojure.tools.logging :as log]
-   [postal.core :as postal]))
+   [sample.views.upload :refer [upload-page]]))
 
 
 (defn send-email [email log-content]
@@ -43,7 +45,6 @@
                                      :type "text/plain"
                                      :name "log.txt"}]}]  
       (try
-        ;; Slanje emaila
         (postal/send-message mail-settings email-data)
         (log/info "Email sent successfully.")
         (catch Exception e
@@ -51,10 +52,14 @@
 
 (defn send-email-handler [request]
   (let [email (get-in request [:multipart-params "email"])
-        log-content (get-in request [:multipart-params "logContent"])]
+        log-content (get-in request [:multipart-params "logContent"])
+        subject "Log File" 
+        body "Hi, please check out these logs" 
+        tmp-file (java.io.File/createTempFile "log-content-" ".txt")]
     (if (and email log-content)
       (do
-        (send-email email log-content)
+        (spit tmp-file log-content)
+        (send-email-with-attachment email subject body (.getAbsolutePath tmp-file))
         (response/response "Email sent successfully!"))
       (response/response "Missing email or log content"))))
 

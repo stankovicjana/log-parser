@@ -11,8 +11,7 @@
                  [ring/ring-mock "0.4.0"]
                  [com.draines/postal "2.0.4"]
                  [funcool/struct "1.4.0"]
-                 [clojurewerkz/scrypt "1.2.0"]
-                 ]
+                 [clojurewerkz/scrypt "1.2.0"]]
 
   :plugins [[lein-ring "0.12.5"]
             [migratus-lein "0.5.0"]]
