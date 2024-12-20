@@ -1,20 +1,137 @@
 (ns sample.tests
-  (:require [midje.sweet :refer :all]
-            [postal.core :as postal]))
+  (:require
+   [clojure.string :as str]
+   [postal.core :refer [send-message]]
+   [postal.message :as msg])
+  (:import
+   [java.net Socket]
+   [java.nio.file Files Paths]))
+(let [socket (Socket. "smtp.mail.yahoo.com" 587)]
+  (println "Connection successful!")
+  (.close socket))
 
-(fact "test"
-      (+ 1 2) => 3)
+(defn add-extra-jana [^javax.mail.Message jmsg email-data]
+  "Add headers, recipients, and attachments to the message."
+  (let [{:keys [to from cc bcc subject attachments]} email-data]
+    ;; Set the 'from' field
+    (when from
+      (.setFrom jmsg (javax.mail.internet.InternetAddress. from)))
 
+    ;; Add recipients
+    (doseq [recipient-type [:to :cc :bcc]]
+      (when-let [recipients (get email-data recipient-type)]
+        (doseq [recipient recipients]
+          (.addRecipient jmsg
+                         (case recipient-type
+                           :to javax.mail.Message$RecipientType/TO
+                           :cc javax.mail.Message$RecipientType/CC
+                           :bcc javax.mail.Message$RecipientType/BCC)
+                         (javax.mail.internet.InternetAddress. recipient)))))
 
+    ;; Set the subject
+    (when subject
+      (.setSubject jmsg subject))
+
+    ;; Add attachments
+    (when attachments
+      (let [multipart (javax.mail.internet.MimeMultipart.)]
+        ;; Add the main body part
+        (let [body-part (javax.mail.internet.MimeBodyPart.)]
+          (.setText body-part (:body email-data))
+          (.addBodyPart multipart body-part))
+
+        ;; Add each attachment
+        (doseq [attachment attachments]
+          (let [attachment-part (javax.mail.internet.MimeBodyPart.)
+                data-source (javax.mail.util.ByteArrayDataSource.
+                             (:content attachment)
+                             (:content-type attachment))]
+            (.setDataHandler attachment-part
+                             (javax.activation.DataHandler. data-source))
+            (.setFileName attachment-part (:file-name attachment))
+            (.addBodyPart multipart attachment-part)))
+
+        ;; Set the content of the message
+        (.setContent jmsg multipart))))
+  jmsg)
+(defn send-email-with-attachment
+  "Send an email with an attachment."
+  [to-email from-email subject body file-path]
+  (let [file-bytes (java.nio.file.Files/readAllBytes (java.nio.file.Paths/get file-path (into-array String [])))
+        file-name (last (clojure.string/split file-path #"[\\/]+"))
+        attachment {:content-type "application/octet-stream"
+                    :content file-bytes
+                    :file-name file-name
+                    :type :attachment}
+        email-data {:from from-email
+                    :to [to-email]
+                    :subject subject
+                    :body body
+                    :attachments [attachment]}
+        mail-settings
+        {:host (System/getenv "SMTP_HOST")
+         :port 587
+         :user (System/getenv "SMTP_USER")
+         :pass (System/getenv "SMTP_APP_PASSWORD")
+         :tls true}]
+
+    ;; Set SMTP properties
+    (let [props (doto (java.util.Properties.)
+                  (.put "mail.smtp.starttls.enable" (str (:tls mail-settings)))
+                  (.put "mail.smtp.host" (:host mail-settings))
+                  (.put "mail.smtp.port" (str (:port mail-settings)))
+                  (.put "mail.smtp.auth" "true")) ;; Authenticates with the provided user and pass
+          ;; Get the session with authentication
+          session (javax.mail.Session/getInstance props
+                                                  (proxy [javax.mail.Authenticator] []
+                                                    (getPasswordAuthentication []
+                                                      (javax.mail.PasswordAuthentication. (:user mail-settings) (:pass mail-settings)))))
+          ;; Create a new MimeMessage
+          jmsg (javax.mail.internet.MimeMessage. session)]
+
+      (try
+        ;; Log SMTP properties and email data
+        (println "SMTP Properties:" props)
+        (println "Email data:" email-data)
+
+        ;; Add email headers and body
+        (add-extra-jana jmsg email-data)
+
+        ;; Send email
+        (javax.mail.Transport/send jmsg)
+
+        ;; Success message
+        (println "Email sent successfully with attachment.")
+
+        (catch Exception e
+          ;; Error handling
+          (println "Error sending email:" (.getMessage e))
+          (println "Stack trace:")
+          (.printStackTrace e))))))
+  
+  (send-email-with-attachment "stankovicjana000@gmail.com"
+                              (System/getenv "SMTP_USER")
+                              "Subject with Attachment"
+                              "Here is the email body."
+                              "C:\\new\\test.txt")
+  
+  (def email-data {:from (System/getenv "SMTP_USER")
+                   :to "stankovicjana000@gmail.com"
+                   :subject "Test Email"
+                   :body "This is a test email."})
+  
 (def mail-settings {:host (System/getenv "SMTP_HOST")
                     :port 587
                     :user (System/getenv "SMTP_USER")
                     :pass (System/getenv "SMTP_APP_PASSWORD")
                     :tls true})
 
-(def email-data {:from (System/getenv "SMTP_USER")
-                 :to "stankovicjana000@gmail.com"
-                 :subject "Test Email"
-                 :body "This is a test email."})
 
-(postal/send-message mail-settings email-data)
+(def email-data {:from (System/getenv "SMTP_USER")
+                 :to ["recipient@example.com"]
+                 :subject "Test Email"
+                 :body "This is a test email body."
+                 }) ;; Dodaj priloge ako je potrebno
+
+
+(send-message mail-settings email-data)

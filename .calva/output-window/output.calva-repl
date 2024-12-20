@@ -298,3 +298,645 @@ clj꞉sample.handler꞉> 
 clj꞉sample.handler꞉> 
 #'sample.handler/send-email-handler
 clj꞉sample.handler꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:53808 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉user꞉> 
+#'sample.tests/send-email
+clj꞉sample.tests꞉> 
+; Failed to send email: clojure.lang.PersistentVector cannot be cast to java.lang.String
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email
+clj꞉sample.tests꞉> 
+; Failed to send email: clojure.lang.PersistentVector cannot be cast to java.lang.String
+nil
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:38:7).
+; No such namespace: log
+clj꞉sample.tests꞉> 
+; Failed to send email: clojure.lang.PersistentVector cannot be cast to java.lang.String
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email
+clj꞉sample.tests꞉> 
+; Failed to send email: clojure.lang.PersistentVector cannot be cast to java.lang.String
+nil
+clj꞉sample.tests꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:55169 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:26:22).
+; No such namespace: Files
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:26:22).
+; No such namespace: Files
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at sample.tests/send-email-with-existing-file (form-init1223235163327724319.clj:25).
+; java.lang.String cannot be cast to java.net.URI
+clj꞉sample.tests꞉> 
+; Syntax error macroexpanding clojure.core/ns at (d:\FON\MASTER\log-parser\test\sample\tests.clj:1:1).
+; import - failed: #{:refer-clojure} at: [:ns-clauses :refer-clojure :clause] spec: :clojure.core.specs.alpha/ns-refer-clojure
+; import - failed: #{:require} at: [:ns-clauses :require :clause] spec: :clojure.core.specs.alpha/ns-require
+; import - failed: #{:import} at: [:ns-clauses :import :clause] spec: :clojure.core.specs.alpha/ns-import
+; import - failed: #{:use} at: [:ns-clauses :use :clause] spec: :clojure.core.specs.alpha/ns-use
+; import - failed: #{:refer} at: [:ns-clauses :refer :clause] spec: :clojure.core.specs.alpha/ns-refer
+; import - failed: #{:load} at: [:ns-clauses :load :clause] spec: :clojure.core.specs.alpha/ns-load
+; import - failed: #{:gen-class} at: [:ns-clauses :gen-class :clause] spec: :clojure.core.specs.alpha/ns-gen-class
+clj꞉sample.tests꞉> 
+; Syntax error (IllegalArgumentException) compiling new at (d:\FON\MASTER\log-parser\test\sample\tests.clj:29:18).
+; Unable to resolve classname: URI
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+; Execution error (URISyntaxException) at java.net.URI$Parser/fail (REPL:-1).
+; Illegal character in path at index 10: file:///C:\New folder\test.txt
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+; Execution error (NoSuchFileException) at sun.nio.fs.WindowsException/translateToIOException (REPL:-1).
+; C:\New+folder\test.txt
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:30:17).
+; No such namespace: Base64
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/encode-string-to-base64
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:53540 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉user꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:49:35).
+; Unable to resolve symbol: encode-string-to-base64 in this context
+clj꞉sample.tests꞉> 
+#'sample.tests/encode-string-to-base64
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:54210 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:60:1).
+; Unable to resolve symbol: send-email-with-existing-file in this context
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:60:1).
+; Unable to resolve symbol: send-email-with-existing-file in this context
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:60:1).
+; Unable to resolve symbol: send-email-with-existing-file in this context
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:60:1).
+; Unable to resolve symbol: send-email-with-existing-file in this context
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Syntax error (IllegalArgumentException) compiling . at (d:\FON\MASTER\log-parser\test\sample\tests.clj:36:24).
+; No matching method getEncoder.encodeToString found taking 1 args for class java.util.Base64
+clj꞉sample.tests꞉> 
+; Syntax error (IllegalArgumentException) compiling . at (d:\FON\MASTER\log-parser\test\sample\tests.clj:36:24).
+; No matching method getEncoder.encodeToString found taking 1 args for class java.util.Base64
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:54443 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+#'sample.tests/send-email-with-existing-file2
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Syntax error reading source at (REPL:83:45).
+; Unmatched delimiter: )
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-existing-file2
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:37:40).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:54744 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉user꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:54777 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉user꞉> 
+; Syntax error reading source at (REPL:53:1).
+; EOF while reading, starting at line 34
+clj꞉sample.tests꞉> 
+; Syntax error reading source at (REPL:61:1).
+; EOF while reading, starting at line 34
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:38:20).
+; No such namespace: Files
+clj꞉sample.tests꞉> 
+; Execution error (FileNotFoundException) at sample.tests/eval10597$loading (form-init6799118637930267408.clj:1).
+; Could not locate java/nio/file/Files__init.class, java/nio/file/Files.clj or java/nio/file/Files.cljc on classpath.
+clj꞉sample.tests꞉> 
+; Execution error (FileNotFoundException) at sample.tests/eval10603$loading (form-init6799118637930267408.clj:1).
+; Could not locate java/nio/file/Files__init.class, java/nio/file/Files.clj or java/nio/file/Files.cljc on classpath.
+clj꞉sample.tests꞉> 
+; Syntax error (ClassNotFoundException) compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:2:3).
+; clojure.string
+clj꞉sample.tests꞉> 
+; Execution error (FileNotFoundException) at sample.tests/eval10610$loading (form-init6799118637930267408.clj:1).
+; Could not locate java/nio/file/Files__init.class, java/nio/file/Files.clj or java/nio/file/Files.cljc on classpath.
+clj꞉sample.tests꞉> 
+; Execution error (FileNotFoundException) at sample.tests/eval10616$loading (form-init6799118637930267408.clj:1).
+; Could not locate java/nio/file/Files__init.class, java/nio/file/Files.clj or java/nio/file/Files.cljc on classpath.
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:29:20).
+; No such namespace: Files
+clj꞉sample.tests꞉> 
+; Execution error (FileNotFoundException) at sample.tests/eval10623$loading (form-init6799118637930267408.clj:1).
+; Could not locate java/nio/file/Files__init.class, java/nio/file/Files.clj or java/nio/file/Files.cljc on classpath.
+clj꞉sample.tests꞉> 
+; Execution error (FileNotFoundException) at sample.tests/eval10629$loading (form-init6799118637930267408.clj:1).
+; Could not locate java/nio/file/Files__init.class, java/nio/file/Files.clj or java/nio/file/Files.cljc on classpath.
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:28:20).
+; No such namespace: Files
+clj꞉sample.tests꞉> 
+; Execution error (FileNotFoundException) at sample.tests/eval10636$loading (form-init6799118637930267408.clj:1).
+; Could not locate java/nio/file/Files__init.class, java/nio/file/Files.clj or java/nio/file/Files.cljc on classpath.
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:27:40).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+; Syntax error reading source at (REPL:44:1).
+; EOF while reading, starting at line 24
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:27:40).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:54933 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:27:40).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+; Syntax error reading source at (REPL:43:1).
+; EOF while reading, starting at line 24
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:27:40).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+; Syntax error reading source at (REPL:45:1).
+; EOF while reading, starting at line 26
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:30:40).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+; Syntax error reading source at (REPL:46:1).
+; EOF while reading, starting at line 27
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at sample.tests/send-email-with-attachment (form-init4090240000953567426.clj:8).
+; java.lang.String cannot be cast to java.net.URI
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at sample.tests/send-email-with-attachment (form-init4090240000953567426.clj:8).
+; java.lang.String cannot be cast to java.net.URI
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:11:14).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:54933 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+#'sample.tests/add-extra!
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:22:40).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:9:3).
+; Unable to resolve symbol: msgrest in this context
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:9:3).
+; Unable to resolve symbol: msgrest in this context
+clj꞉sample.tests꞉> 
+; Syntax error reading source at (REPL:36:1).
+; EOF while reading, starting at line 6
+clj꞉sample.tests꞉> 
+#'sample.tests/add-extra!
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+#'sample.tests/add-extra!
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:22:54).
+; Unable to resolve symbol: file-path in this context
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+#'sample.tests/add-extra-jana
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (IllegalArgumentException) at sample.tests/send-email-with-attachment (form-init4090240000953567426.clj:38).
+; No matching field found: send for class postal.message.proxy$javax.mail.internet.MimeMessage$ff19274a
+clj꞉sample.tests꞉> 
+#'sample.tests/add-extra-jana
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (ConnectException) at java.net.DualStackPlainSocketImpl/connect0 (REPL:-2).
+; Connection refused: connect
+clj꞉sample.tests꞉> 
+; Execution error (ConnectException) at java.net.DualStackPlainSocketImpl/connect0 (REPL:-2).
+; Connection refused: connect
+clj꞉sample.tests꞉> 
+; Error sending email: Couldn't connect to host, port: localhost, 25; timeout -1
+nil
+clj꞉sample.tests꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:54933 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+; Error sending email: Couldn't connect to host, port: localhost, 25; timeout -1
+nil
+clj꞉sample.tests꞉> 
+; Syntax error (IllegalArgumentException) compiling reify* at (d:\FON\MASTER\log-parser\test\sample\tests.clj:78:51).
+; only interfaces are supported, had: javax.mail.Authenticator
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Error sending email: null
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Execution error (NumberFormatException) at java.lang.Integer/parseInt (REPL:-1).
+; null
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; SMTP Properties: #object[java.util.Properties 0x505ae49c {mail.smtp.starttls.enable=true, mail.smtp.port=587, mail.smtp.host=smtp.mail.yahoo.com}]
+; Email data: {:from stankovicjana@yahoo.com, :to [stankovicjana000@gmail.com], :subject Subject with Attachment, :body Here is the email body., :attachments [{:content-type application/octet-stream, :content #object[[B 0x4ef645fe [B@4ef645fe], :file-name test.txt, :type :attachment}]}
+; Error sending email: 554 Email rejected
+; 
+; Stack trace:
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; Error sending email: 554 Email rejected
+; 
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; SMTP Properties: #object[java.util.Properties 0xd67d7cf {mail.smtp.starttls.enable=true, mail.smtp.port=587, mail.smtp.host=smtp.mail.yahoo.com}]
+; Email data: {:from stankovicjana@yahoo.com, :to [stankovicjana000@gmail.com], :subject Subject with Attachment, :body Here is the email body., :attachments [{:content-type application/octet-stream, :content #object[[B 0x30ba5cbf [B@30ba5cbf], :file-name test.txt, :type :attachment}]}
+; Error sending email: 554 Email rejected
+; 
+; Stack trace:
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/email-data
+clj꞉sample.tests꞉> 
+; Execution error (UnknownHostException) at java.net.AbstractPlainSocketImpl/connect (REPL:-1).
+; not.provided
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; SMTP Properties: #object[java.util.Properties 0x32e7ec59 {mail.smtp.starttls.enable=true, mail.smtp.port=587, mail.smtp.host=smtp.mail.yahoo.com}]
+; Email data: {:from stankovicjana@yahoo.com, :to [stankovicjana000@gmail.com], :subject Subject with Attachment, :body Here is the email body., :attachments [{:content-type application/octet-stream, :content #object[[B 0x2529950a [B@2529950a], :file-name test.txt, :type :attachment}]}
+; Error sending email: 554 Email rejected
+; 
+; Stack trace:
+nil
+clj꞉sample.tests꞉> 
+; Execution error (UnknownHostException) at java.net.AbstractPlainSocketImpl/connect (REPL:-1).
+; not.provided
+clj꞉sample.tests꞉> 
+; Execution error (UnknownHostException) at java.net.AbstractPlainSocketImpl/connect (REPL:-1).
+; not.provided
+clj꞉sample.tests꞉> 
+; Syntax error reading source at (REPL:97:1).
+; EOF while reading string
+clj꞉sample.tests꞉> 
+#'sample.tests/email-data
+clj꞉sample.tests꞉> 
+; Execution error (UnknownHostException) at java.net.AbstractPlainSocketImpl/connect (REPL:-1).
+; not.provided
+clj꞉sample.tests꞉> 
+; Syntax error macroexpanding clojure.core/ns at (d:\FON\MASTER\log-parser\test\sample\tests.clj:1:1).
+; import - failed: #{:refer-clojure} at: [:ns-clauses :refer-clojure :clause] spec: :clojure.core.specs.alpha/ns-refer-clojure
+; import - failed: #{:require} at: [:ns-clauses :require :clause] spec: :clojure.core.specs.alpha/ns-require
+; import - failed: #{:import} at: [:ns-clauses :import :clause] spec: :clojure.core.specs.alpha/ns-import
+; import - failed: #{:use} at: [:ns-clauses :use :clause] spec: :clojure.core.specs.alpha/ns-use
+; import - failed: #{:refer} at: [:ns-clauses :refer :clause] spec: :clojure.core.specs.alpha/ns-refer
+; import - failed: #{:load} at: [:ns-clauses :load :clause] spec: :clojure.core.specs.alpha/ns-load
+; import - failed: #{:gen-class} at: [:ns-clauses :gen-class :clause] spec: :clojure.core.specs.alpha/ns-gen-class
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Connection successful!
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/mail-settings
+clj꞉sample.tests꞉> 
+#'sample.tests/email-data
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:121:6).
+; No such var: msg/send-message
+clj꞉sample.tests꞉> 
+; Execution error (IllegalStateException) at sample.tests/eval2914 (form-init4090240000953567426.clj:123).
+; Attempting to call unbound fn: #'sample.tests/send-test-email
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:121:6).
+; No such var: msg/send-message
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\test\sample\tests.clj:127:1).
+; Unable to resolve symbol: send-message in this context
+clj꞉sample.tests꞉> 
+nil
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+; Execution error (ClassCastException) at postal.message/add-extra! (message.clj:150).
+; clojure.lang.PersistentVector cannot be cast to java.lang.String
+clj꞉sample.tests꞉> 
+#'sample.tests/email-data
+clj꞉sample.tests꞉> 
+{:code 0, :error :SUCCESS, :message "messages sent"}
+clj꞉sample.tests꞉> 
+; SMTP Properties: #object[java.util.Properties 0x6420301e {mail.smtp.starttls.enable=true, mail.smtp.port=587, mail.smtp.host=smtp.mail.yahoo.com}]
+; Email data: {:from stankovicjana@yahoo.com, :to [stankovicjana000@gmail.com], :subject Subject with Attachment, :body Here is the email body., :attachments [{:content-type application/octet-stream, :content #object[[B 0x5bd27549 [B@5bd27549], :file-name test.txt, :type :attachment}]}
+; Error sending email: 554 Email rejected
+; 
+; Stack trace:
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; SMTP Properties: #object[java.util.Properties 0x39671dca {mail.smtp.starttls.enable=true, mail.smtp.port=587, mail.smtp.host=smtp.mail.yahoo.com}]
+; Email data: {:from stankovicjana@yahoo.com, :to stankovicjana000@gmail.com, :subject Subject with Attachment, :body Here is the email body., :attachments [{:content-type application/octet-stream, :content #object[[B 0xc0b1f84 [B@c0b1f84], :file-name test.txt, :type :attachment}]}
+; Error sending email: java.lang.Character cannot be cast to java.lang.String
+; Stack trace:
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; SMTP Properties: #object[java.util.Properties 0x2b8809ff {mail.smtp.starttls.enable=true, mail.smtp.port=587, mail.smtp.host=smtp.mail.yahoo.com}]
+; Email data: {:from stankovicjana@yahoo.com, :to [stankovicjana000@gmail.com], :subject Subject with Attachment, :body Here is the email body., :attachments [{:content-type application/octet-stream, :content #object[[B 0x76b92fc0 [B@76b92fc0], :file-name test.txt, :type :attachment}]}
+; Error sending email: clojure.lang.PersistentVector cannot be cast to java.lang.String
+; Stack trace:
+nil
+clj꞉sample.tests꞉> 
+#'sample.tests/send-email-with-attachment
+clj꞉sample.tests꞉> 
+; SMTP Properties: #object[java.util.Properties 0x364bf010 {mail.smtp.starttls.enable=true, mail.smtp.port=587, mail.smtp.auth=true, mail.smtp.host=smtp.mail.yahoo.com}]
+; Email data: {:from stankovicjana@yahoo.com, :to [stankovicjana000@gmail.com], :subject Subject with Attachment, :body Here is the email body., :attachments [{:content-type application/octet-stream, :content #object[[B 0x6312e46f [B@6312e46f], :file-name test.txt, :type :attachment}]}
+; Email sent successfully with attachment.
+nil
+clj꞉sample.tests꞉> 

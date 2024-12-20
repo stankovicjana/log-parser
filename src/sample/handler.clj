@@ -19,34 +19,39 @@
    [clojure.tools.logging :as log]
    [postal.core :as postal]))
 
+
 (defn send-email [email log-content]
   (trace/trace "Sending email to:" email)
-  (let [log-file "log.txt"
-        log-file-content (str log-content)
-        mail-settings {:host (System/getenv "SMTP_HOST")
-                       :port 587
-                       :user (System/getenv "SMTP_USER")
-                       :pass (System/getenv "SMTP_APP_PASSWORD")
-                       :tls true}
-        email-data {:from (System/getenv "SMTP_USER")
-                    :to email
-                    :subject "Selected Logs"
-                    :body "Please find the selected logs attached."
-                    :attachments [{:file log-file
-                                   :content log-file-content
-                                   :type "text/plain"
-                                   :name log-file}]}]
-    (try
-      (postal/send-message mail-settings email-data)
-      (log/info "Email sent successfully.")
-      (catch Exception e
-        (log/error e "Failed to send email")))))
+
+  (let [log-file "C:\\Users\\stank\\OneDrive\\Documents\\User.txt"
+        log-file-content (str log-content)]  
+    (trace/trace "Type of log-file-content:" (type log-file-content))
+    (trace/trace "Type of log-file:" (type log-file)) 
+    (trace/trace "Log file content:" log-file-content) 
+(trace/trace "Log file content:" log-file-content)
+
+    (let [mail-settings {:host (System/getenv "SMTP_HOST")
+                         :port 587
+                         :user (System/getenv "SMTP_USER")
+                         :pass (System/getenv "SMTP_APP_PASSWORD")
+                         :tls true}
+          email-data {:from (System/getenv "SMTP_USER")
+                      :to email
+                      :subject "Selected Logs"
+                      :body "Please find the selected logs attached."
+                      :attachments [{:content "Test log content directly inserted into email"
+                                     :type "text/plain"
+                                     :name "log.txt"}]}]  
+      (try
+        ;; Slanje emaila
+        (postal/send-message mail-settings email-data)
+        (log/info "Email sent successfully.")
+        (catch Exception e
+          (log/error e "Failed to send email"))))))
+
 (defn send-email-handler [request]
-  (trace/trace "Request params: " request)
-  (let [email (get-in request [:multipart-params :email])
-        log-content (get-in request [:multipart-params :logContent])]
-    (trace/trace "Email: " email)
-    (trace/trace "Log content: " log-content)
+  (let [email (get-in request [:multipart-params "email"])
+        log-content (get-in request [:multipart-params "logContent"])]
     (if (and email log-content)
       (do
         (send-email email log-content)
@@ -113,7 +118,8 @@
 
 (def app
   (-> (routes app-routes)
+      (wrap-multipart-params) 
       (wrap-params)
       (wrap-session)
-      (wrap-resource "public")
-      (wrap-multipart-params)))
+      (wrap-resource "public")))
+
