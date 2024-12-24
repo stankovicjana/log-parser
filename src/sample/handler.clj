@@ -1,5 +1,6 @@
 (ns sample.handler
-  #_{:clj-kondo/ignore [:duplicate-require]}
+  (:import (com.sun.jna Native Library Pointer)
+           (com.sun.jna.ptr PointerByReference))
   (:require
    [cheshire.core :as json]
    [clojure.data.json :as jsonData]
@@ -19,8 +20,8 @@
    [sample.helpers :refer [send-email-with-attachment]]
    [sample.views.layout :as layout]
    [sample.views.trace :as view]
-   [sample.views.upload :refer [upload-page]]))
-
+   [sample.views.upload :refer [upload-page]])
+  )
 
 (defn send-email [email log-content]
   (trace/trace "Sending email to:" email)
@@ -85,12 +86,7 @@
       (handler (assoc request :user-id user-id)))))
 
 (defn get-logs [log-type start-date end-date]
-  (cond
-    (= log-type "event-viewer") {:logs [{:level "Error" :dateTime "2024-12-11 10:00 AM" :source "System" :eventId 1 :taskCategory "System Crash"}]}
-    (= log-type "system-log") {:logs [{:level "Warning" :dateTime "2024-12-11 11:30 AM" :source "Security" :eventId 2 :taskCategory "Login Attempt"}]}
-    (= log-type "application-log") {:logs [{:level "Info" :dateTime "2024-12-11 02:00 PM" :source "App" :eventId 3 :taskCategory "Request"}]}
-    (= log-type "security-log") {:logs [{:level "Alert" :dateTime "2024-12-11 03:15 PM" :source "Security" :eventId 4 :taskCategory "Suspicious Activity"}]}
-    :else {:logs []}))
+  )
 
 (defn trace-logs-handler [request]
   (let [params (jsonData/read-str (slurp (:body request)) :key-fn keyword)

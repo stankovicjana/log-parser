@@ -6,6 +6,7 @@
   (:import
    [java.net Socket]
    [java.nio.file Files Paths]))
+
 (let [socket (Socket. "smtp.mail.yahoo.com" 587)]
   (println "Connection successful!")
   (.close socket))
@@ -94,28 +95,18 @@
         (println "SMTP Properties:" props)
         (println "Email data:" email-data)
 
-        ;; Add email headers and body
         (add-extra-jana jmsg email-data)
 
-        ;; Send email
         (javax.mail.Transport/send jmsg)
 
-        ;; Success message
         (println "Email sent successfully with attachment.")
 
         (catch Exception e
-          ;; Error handling
           (println "Error sending email:" (.getMessage e))
           (println "Stack trace:")
           (.printStackTrace e))))))
   
-  (send-email-with-attachment "stankovicjana000@gmail.com"
-                              (System/getenv "SMTP_USER")
-                              "Subject with Attachment"
-                              "Here is the email body."
-                              "C:\\new\\test.txt")
-  
-  (def email-data {:from (System/getenv "SMTP_USER")
+(def email-data {:from (System/getenv "SMTP_USER")
                    :to "stankovicjana000@gmail.com"
                    :subject "Test Email"
                    :body "This is a test email."})
@@ -131,7 +122,4 @@
                  :to ["recipient@example.com"]
                  :subject "Test Email"
                  :body "This is a test email body."
-                 }) ;; Dodaj priloge ako je potrebno
-
-
-(send-message mail-settings email-data)
+                 }) 
