@@ -1,10 +1,10 @@
 (ns sample.logs
   (:require [clojure.string :as s])
-  (:import [java.nio.file Paths StandardWatchEventKinds]
-           [java.net URI]))
-(defn watch-file
-  []
-  (let [file-path (URI/create "file:///C:/new/test.txt")
+  (:import (java.nio.file Paths StandardWatchEventKinds WatchService)
+           (java.net URI)))
+
+(defn watch-file [file-path]
+  (let [file-path (URI/create (str "file:///" (s/replace file-path #"\\" "/")))
         path (Paths/get file-path)
         parent-path (.getParent path)
         watch-service (.newWatchService (.getFileSystem path))]
@@ -15,16 +15,9 @@
         (let [key (.take watch-service)]
           (doseq [event (.pollEvents key)]
             (when (= (.kind event) StandardWatchEventKinds/ENTRY_MODIFY)
-              (let [updated-file (str (.resolve parent-path (.context event)))
-                    content (slurp updated-file)]
-                (println "File updated:" updated-file)
-                (println "File content read:" content)
-                (when (some #(s/includes? (s/lower-case %) "error") (s/split content #"\n"))
-                  (println "Error detected in file! Updated content:")
-                  (println content)))))
+              (let [updated-file (str (.resolve parent-path (.context event)))]
+                (println "File updated:" updated-file))))
           (.reset key)
           (recur))))))
 
-
-
-(watch-file)
+(watch-file"C:/new/test.txt")

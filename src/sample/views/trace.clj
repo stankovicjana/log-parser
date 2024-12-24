@@ -5,29 +5,43 @@
 (defn trace-page [user]
   [:div.content
    [:h2 "Choose the log you want to trace:"]
-   [:select {:id "log-type"}
-    [:option {:value "event-viewer"} "Event Viewer"]
-    [:option {:value "system-log"} "System Log"]
-    [:option {:value "application-log"} "Application Log"]
-    [:option {:value "security-log"} "Security Log"]]
-   [:div.trace
+   [:form {:id "trace-form" :action "/trace" :method "post" :enctype "multipart/form-data"}
     [:div
-     [:label "From: "]
-     [:input {:type "date" :name "start-date" :id "start-date"}]]
-    [:div
-     [:label "To: "]
-     [:input {:type "date" :name "end-date" :id "end-date"}]]]
-   [:button {:type "button" :id "trace-btn"} "Retrive data"]
-   [:div {:id "result"}]
-   [:h3 "Log Data"]
-   [:table {:border "1" :cellspacing "0" :cellpadding "5"}
-    [:thead
-     [:tr
-      [:th "Level"]
-      [:th "Date and Time"]
-      [:th "Source"]
-      [:th "Event ID"]
-      [:th "Task Category"]]]
-    [:tbody {:id "event-table-body"}]]]
-  )
-
+     [:input {:id "file-trace" :type "file" :name "file" :style "display:none;"}]
+     [:label {:for "file-trace" :class "custom-file-upload"} "Choose File"]
+     [:span {:id "file-name"} "No file chosen"]
+     [:button {:type "submit" :id "trace-btn"} "Trace file"]]
+    [:div {:id "response-message" :style {:margin-top "20px"}}]]
+  [:script
+     "document.getElementById('file-trace').addEventListener('change', function(event) {
+          document.getElementById('file-name').textContent = event.target.files[0].name;
+      });
+      document.getElementById('trace-form').onsubmit = function(event) {
+          event.preventDefault();  
+          var formData = new FormData(document.getElementById('trace-form'));
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '/trace', true);  
+          xhr.onload = function () {
+              if (xhr.status === 200) {
+                  try {
+                      var data = JSON.parse(xhr.responseText);  
+                      var responseMessageDiv = document.getElementById('response-message');
+                      
+                      if (data.status === 'success') {
+                          responseMessageDiv.innerHTML = '<p style=\"color: green;\">' + data.message + '</p>';
+                      } else {
+                          responseMessageDiv.innerHTML = '<p style=\"color: red;\">' + data.message + '</p>';
+                      }
+                  } catch (e) {
+                      alert('Error parsing response: ' + e.message);
+                  }
+              } else {
+                  alert('Error: ' + xhr.status);
+              }
+          };
+          xhr.onerror = function () {
+              alert('Request failed. Please try again later.');
+          };
+          xhr.send(formData);  
+      };
+      "]])  

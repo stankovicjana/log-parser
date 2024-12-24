@@ -1,9 +1,7 @@
 (ns sample.handler
-  (:import (com.sun.jna Native Library Pointer)
-           (com.sun.jna.ptr PointerByReference))
   (:require
    [cheshire.core :as json]
-   [clojure.data.json :as jsonData]
+   [clojure.java.io :as io]
    [clojure.tools.logging :as log]
    [clojure.tools.trace :as trace]
    [compojure.core :refer [context defroutes GET POST routes]]
@@ -14,10 +12,11 @@
    [ring.middleware.session :refer [wrap-session]]
    [ring.util.response :as response]
    [sample.helpers :refer [get-user]]
+   [sample.helpers :refer [send-email-with-attachment]]
+   [sample.logs :refer [watch-file]]
    [sample.parser :refer [process-logfile]]
    [sample.routes.auth :refer [auth-routes]]
    [sample.routes.home :refer [home-routes]]
-   [sample.helpers :refer [send-email-with-attachment]]
    [sample.views.layout :as layout]
    [sample.views.trace :as view]
    [sample.views.upload :refer [upload-page]])
@@ -85,16 +84,25 @@
     (let [user-id (:user-id (:session request))]
       (handler (assoc request :user-id user-id)))))
 
-(defn get-logs [log-type start-date end-date]
-  )
-
-(defn trace-logs-handler [request]
-  (let [params (jsonData/read-str (slurp (:body request)) :key-fn keyword)
-        log-type (get params :logType)
-        start-date (get params :startDate)
-        end-date (get params :endDate)
-        logs (get-logs log-type start-date end-date)]
-    (response/response (json/generate-string logs))))
+(defn start-trace-handler [request]
+  (let [file (get-in request [:params "file"])]
+              (trace/trace "Request params:" file)
+    (if file
+      (try
+        (let [filename (:filename file)
+              tempfile (:tempfile file)
+              size (:size file)]
+          (let [destination (str "C:/new/" filename)]
+            (io/copy tempfile (io/file destination))
+            (trace/trace "Request desct:" destination)
+            (watch-file destination)
+            (response/response (json/generate-string {:status "success"
+                                                      :message (str "File " filename " uploaded and is being monitored.")
+                                                      :file filename}))))
+        (catch Exception e
+          (println "Error processing file:" (.getMessage e))
+          (response/response "An error occurred while processing the file.")))
+      (response/response "No file uploaded"))))
 
 (defroutes private-routes
   (wrap-current-user-id
@@ -111,8 +119,9 @@
 (defroutes app-routes
   (POST "/upload" request
     (upload-file-handler request))
+  (POST "/trace" request
+    (start-trace-handler request))
   (POST "/send-email" request (send-email-handler request))
-  (POST "/trace-logs" request (trace-logs-handler request))
   auth-routes
   home-routes
   private-routes)

@@ -587,3 +587,269 @@ clj꞉sample.logs꞉> 
 ; ju
 ; error
 ; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Monitoring changes to file: #object[java.net.URI 0x133959d8 file:///C:/new/test.txt]
+#object[clojure.core$future_call$reify__8544 0x1de6d0a3 {:status :pending, :val nil}]
+clj꞉sample.logs꞉> 
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:60343 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\src\sample\logs.clj:28:1).
+; Unable to resolve symbol: watch-file in this context
+clj꞉sample.logs꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\src\sample\logs.clj:28:1).
+; Unable to resolve symbol: watch-file in this context
+clj꞉sample.logs꞉> 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Monitoring changes to file: #object[java.net.URI 0x2f6d4845 file:///C:/new/test.txt]
+#object[clojure.core$future_call$reify__8544 0x1b69ccc8 {:status :pending, :val nil}]
+clj꞉sample.logs꞉> 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Execution error (FileSystemNotFoundException) at java.nio.file.Paths/get (REPL:-1).
+; Provider "C" not installed
+clj꞉sample.logs꞉> 
+; Execution error (FileSystemNotFoundException) at java.nio.file.Paths/get (REPL:-1).
+; Provider "C" not installed
+clj꞉sample.logs꞉> 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Execution error (ClassCastException) at sample.logs/watch-file (form-init2488648327309572879.clj:5).
+; java.lang.String cannot be cast to java.net.URI
+clj꞉sample.logs꞉> 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Monitoring changes to file: #object[java.net.URI 0x23dcd55c file:///C:/new/test.txt]
+#object[clojure.core$future_call$reify__8544 0x55dbf584 {:status :pending, :val nil}]
+clj꞉sample.logs꞉> 
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
