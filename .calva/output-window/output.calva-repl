@@ -378,3 +378,212 @@ clj꞉sample.logs꞉> 
 #object[clojure.core$future_call$reify__8544 0x7ce3a209 {:status :pending, :val nil}]
 clj꞉sample.logs꞉> 
 ; File updated: C:\Users\stank\OneDrive\Documents\User.txt
+; Syntax error (UnsupportedOperationException) compiling recur at (d:\FON\MASTER\log-parser\src\sample\logs.clj:32:17).
+; Can only recur from tail position
+clj꞉sample.logs꞉> 
+; (defn watch-file
+  []
+  (let [file-path (URI/create "file:///C:/Users/stank/OneDrive/Documents/User.txt")
+        path (Paths/get file-path)  
+        parent-path (.getParent path)
+        watch-service (.newWatchService (.getFileSystem path))]
+    (.register parent-path watch-service (into-array [StandardWatchEventKinds/ENTRY_MODIFY]))
+    (println "Monitoring changes to file:" file-path)
+    (future
+      (loop [previous-content ""]
+        (let [key (.take watch-service)]
+          (doseq [event (.pollEvents key)]
+            (when (= (.kind event) StandardWatchEventKinds/ENTRY_MODIFY)
+              (let [updated-file (str (.resolve parent-path (.context event)))
+                    content (slurp updated-file)]
+                (println "File updated:" updated-file)
+
+                (when (not= content previous-content)
+                  (let [lines (clojure.string/split content #"\n")]
+                    (println "Changed content (new line(s)): ")
+                    (doseq [line lines]
+                      (println line)))
+                  ;; Update `previous-content` for next iteration
+                  (recur content)))))
+          ;; Reset watch key and continue the loop
+          (.reset key)
+          (recur previous-content))))))
+
+clj꞉sample.logs꞉> 
+; Syntax error (UnsupportedOperationException) compiling recur at (d:\FON\MASTER\log-parser\src\sample\logs.clj:31:19).
+; Can only recur from tail position
+clj꞉sample.logs꞉> 
+; Syntax error compiling at (d:\FON\MASTER\log-parser\src\sample\logs.clj:26:30).
+; No such namespace: s
+clj꞉sample.logs꞉> 
+nil
+clj꞉sample.logs꞉> 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Monitoring changes to file: #object[java.net.URI 0x30895885 file:///C:/Users/stank/OneDrive/Documents/User.txt]
+#object[clojure.core$future_call$reify__8544 0x22e41b44 {:status :pending, :val nil}]
+clj꞉sample.logs꞉> 
+; File updated: C:\Users\stank\OneDrive\Documents\User.txt
+; File updated: C:\Users\stank\OneDrive\Documents\User.txt
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Connecting ...
+; Reading port file: file:///d%3A/FON/MASTER/log-parser/.nrepl-port ...
+; Using host:port localhost:56041 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+nil
+clj꞉user꞉> 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Monitoring changes to file: #object[java.net.URI 0x7583b11c file:///C:/Users/stank/OneDrive/Documents/User.txt]
+#object[clojure.core$future_call$reify__8544 0x3d776c08 {:status :pending, :val nil}]
+clj꞉sample.logs꞉> 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Monitoring changes to file: #object[java.net.URI 0x584f8672 file:///C:/Users/stank/OneDrive/Documents/User.txt]
+#object[clojure.core$future_call$reify__8544 0x7a5ae751 {:status :pending, :val nil}]
+clj꞉sample.logs꞉> 
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Monitoring changes to file: #object[java.net.URI 0x7cb8d0b3 file:///C:/Users/stank/OneDrive/Documents/User.txt]
+#object[clojure.core$future_call$reify__8544 0x5ad34c8b {:status :pending, :val nil}]
+clj꞉sample.logs꞉> 
+; File updated: C:\Users\stank\OneDrive\Documents\User.txt
+; File content read: ��/ * 
+ 
+;        T h u r s d a y ,   M a r c h   3 0 ,   2 0 2 3 4 : 1 5 : 4 2   P M 
+ 
+;        U s e r :   
+ 
+;        S e r v e r :   ( l o c a l d b ) \ m s s q l l o c a l d b 
+ 
+;        D a t a b a s e :   P r o S o f t 
+ 
+;        A p p l i c a t i o n :   
+ 
+;  * / 
+ 
+;  
+ 
+;  U s e r 
+ 
+;  e r r o r l a a l 
+ 
+;  e r r o r n f d g m h n g b f 
+ 
+;  b f d 
+ 
+;  e r r o r c s d v f 
+ 
+;  e r r o r 
+ 
+;  l a l a l a l a l 
+ 
+;  o k o k m k m m l m l 
+ 
+;  e r r o r 
+ 
+;  k o k o 
+; File updated: C:\Users\stank\OneDrive\Documents\User.txt
+; File content read: ��/ * 
+ 
+;        T h u r s d a y ,   M a r c h   3 0 ,   2 0 2 3 4 : 1 5 : 4 2   P M 
+ 
+;        U s e r :   
+ 
+;        S e r v e r :   ( l o c a l d b ) \ m s s q l l o c a l d b 
+ 
+;        D a t a b a s e :   P r o S o f t 
+ 
+;        A p p l i c a t i o n :   
+ 
+;  * / 
+ 
+;  
+ 
+;  U s e r 
+ 
+;  e r r o r l a a l 
+ 
+;  e r r o r n f d g m h n g b f 
+ 
+;  b f d 
+ 
+;  e r r o r c s d v f 
+ 
+;  e r r o r 
+ 
+;  l a l a l a l a l 
+ 
+;  o k o k m k m m l m l 
+ 
+;  e r r o r 
+ 
+;  k o k o 
+ 
+;  e r r o r 
+ 
+;  
+; File updated: C:\Users\stank\OneDrive\Documents\User.txt
+; File content read: ��/ * 
+ 
+;        T h u r s d a y ,   M a r c h   3 0 ,   2 0 2 3 4 : 1 5 : 4 2   P M 
+ 
+;        U s e r :   
+ 
+;        S e r v e r :   ( l o c a l d b ) \ m s s q l l o c a l d b 
+ 
+;        D a t a b a s e :   P r o S o f t 
+ 
+;        A p p l i c a t i o n :   
+ 
+;  * / 
+ 
+;  
+ 
+;  U s e r 
+ 
+;  
+; File updated: C:\Users\stank\OneDrive\Documents\User.txt
+; File content read: ��/ * 
+ 
+;        T h u r s d a y ,   M a r c h   3 0 ,   2 0 2 3 4 : 1 5 : 4 2   P M 
+ 
+;        U s e r :   
+ 
+;        S e r v e r :   ( l o c a l d b ) \ m s s q l l o c a l d b 
+ 
+;        D a t a b a s e :   P r o S o f t 
+ 
+;        A p p l i c a t i o n :   
+ 
+;  * / 
+ 
+;  
+ 
+;  U s e r 
+ 
+;  
+#'sample.logs/watch-file
+clj꞉sample.logs꞉> 
+; Monitoring changes to file: #object[java.net.URI 0x6063a0a0 file:///C:/new/test.txt]
+#object[clojure.core$future_call$reify__8544 0x55667f84 {:status :pending, :val nil}]
+clj꞉sample.logs꞉> 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
