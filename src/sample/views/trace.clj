@@ -3,6 +3,7 @@
             [hiccup.element :refer [link-to]]))
 
 (defn trace-page [user]
+  (let [user-id (:id user)]
   [:div.content
    [:h2 "Choose the log you want to trace:"]
    [:form {:id "trace-form" :action "/trace" :method "post" :enctype "multipart/form-data"}
@@ -18,26 +19,46 @@
     [:div
      [:h2 "Enter email to notify if error occurs"]
      [:div {:id "upload-div"}
-     [:input {:list "email-list" :id "custom-combobox" :placeholder "Enter or select email"}]
+     [:input {:list "email-list" :id "custom-textbox" :placeholder "Enter or select email"}]
      [:datalist {:id "email-list"}]
-     [:button {:type "button" :id "custom-button"} "Send"]]
+     [:div {:id "submit-div"}
+     [:button {:type "button" :id "add-button"} "Add friend"]
+     [:button {:type "button" :id "custom-button"} "Send"]]]
     ]
   [:script
-     "fetch('/emails')  
-      .then(response => response.json())
-      .then(data => {
-          const emailList = document.getElementById('email-list');
-          data.emails.forEach(email => {
-              const option = document.createElement('option');
-              option.value = email;
-              emailList.appendChild(option);
-          });
-      })
-      .catch(error => console.error('Error fetching email list:', error));
+   (str "var userId = " user-id ";")
+   "document.getElementById('add-button').addEventListener('click', function() {
+          var email = document.getElementById('custom-textbox').value;  
+          var userId = window.userId;
       
+          if (email) {
+              var newFriend = {
+                  email: email,
+                  user_id: userId
+              };
+      
+              var xhr = new XMLHttpRequest();
+              xhr.open('POST', '/add-friend', true); 
+      
+              xhr.setRequestHeader('Content-Type', 'application/json');  
+      
+              xhr.onload = function() {
+                  if (xhr.status === 200) {
+                      alert('Friend added successfully!');
+                  } else {
+                      alert('Failed to add friend.');
+                  }
+              };
+              xhr.send(JSON.stringify(newFriend));
+          } else {
+              alert('Please enter an email to add a friend.');
+          }
+      });
+  
       document.getElementById('file-trace').addEventListener('change', function(event) {
           document.getElementById('file-name').textContent = event.target.files[0].name;
       });
+  
       document.getElementById('trace-form').onsubmit = function(event) {
           event.preventDefault();  
           var formData = new FormData(document.getElementById('trace-form'));
@@ -66,4 +87,16 @@
           };
           xhr.send(formData);  
       };
-      "]])  
+  
+      fetch('/emails')  
+      .then(response => response.json())
+      .then(data => {
+          const emailList = document.getElementById('email-list');
+          data.emails.forEach(email => {
+              const option = document.createElement('option');
+              option.value = email;
+              emailList.appendChild(option);
+          });
+      })
+      .catch(error => console.error('Error fetching email list:', error));
+    "]]))

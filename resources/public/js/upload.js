@@ -124,3 +124,33 @@ document.getElementById('custom-button').addEventListener('click', function() {
       alert('Please enter an email and select logs to share.');
     }
   });
+
+  document.getElementById('add-button').addEventListener('click', function() {
+    var email = document.getElementById('custom-textbox').value;  
+    var userId = window.userId;
+
+    if (email) {
+        var newFriend = {
+            email: email,
+            user_id: userId
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/add-friend', true); 
+
+        xhr.setRequestHeader('Content-Type', 'application/json');  
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Friend added successfully!');
+            } else {
+                alert('Failed to add friend.');
+            }
+        };
+        xhr.send(JSON.stringify(newFriend));
+    } else {
+        alert('Please enter an email to add a friend.');
+    }
+    
+    
+});

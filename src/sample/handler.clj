@@ -14,7 +14,7 @@
    [sample.helpers :refer [get-user]]
    [sample.helpers :refer [send-email-with-attachment]]
    [sample.logs :refer [watch-file]]
-   [sample.models.friends :refer [fetch-friends]]
+   [sample.models.friends :refer [add-friend fetch-friends]]
    [sample.parser :refer [process-logfile]]
    [sample.routes.auth :refer [auth-routes]]
    [sample.routes.home :refer [home-routes]]
@@ -118,6 +118,7 @@
          (trace (get-user user-id))
          (response/redirect "/login")))
      (GET "/emails" [] (fetch-friends (get-user user-id)))
+     (POST "/add-friend" request (add-friend request))
      )))
 
 (defroutes app-routes
