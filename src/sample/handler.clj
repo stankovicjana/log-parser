@@ -14,6 +14,7 @@
    [sample.helpers :refer [get-user]]
    [sample.helpers :refer [send-email-with-attachment]]
    [sample.logs :refer [watch-file]]
+   [sample.models.friends :refer [fetch-friends]]
    [sample.parser :refer [process-logfile]]
    [sample.routes.auth :refer [auth-routes]]
    [sample.routes.home :refer [home-routes]]
@@ -84,6 +85,7 @@
     (let [user-id (:user-id (:session request))]
       (handler (assoc request :user-id user-id)))))
 
+
 (defn start-trace-handler [request]
   (let [file (get-in request [:params "file"])]
               (trace/trace "Request params:" file)
@@ -114,7 +116,9 @@
      (GET "/trace" []
        (if user-id
          (trace (get-user user-id))
-         (response/redirect "/login"))))))
+         (response/redirect "/login")))
+     (GET "/emails" [] (fetch-friends (get-user user-id)))
+     )))
 
 (defroutes app-routes
   (POST "/upload" request

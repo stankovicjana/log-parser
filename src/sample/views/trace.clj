@@ -6,14 +6,36 @@
   [:div.content
    [:h2 "Choose the log you want to trace:"]
    [:form {:id "trace-form" :action "/trace" :method "post" :enctype "multipart/form-data"}
-    [:div
+    [:div {:id "trace-div"}
+     [:div
      [:input {:id "file-trace" :type "file" :name "file" :style "display:none;"}]
      [:label {:for "file-trace" :class "custom-file-upload"} "Choose File"]
-     [:span {:id "file-name"} "No file chosen"]
-     [:button {:type "submit" :id "trace-btn"} "Trace file"]]
+     [:span {:id "file-name"} "No file chosen"]]
+     [:div {:id "submit-div"}
+     [:button {:type "submit" :id "trace-btn"} "Trace file"]
+     [:button {:type "submit" :id "cancel-btn"} "Cancel tracing"]]]
     [:div {:id "response-message" :style {:margin-top "20px"}}]]
+    [:div
+     [:h2 "Enter email to notify if error occurs"]
+     [:div {:id "upload-div"}
+     [:input {:list "email-list" :id "custom-combobox" :placeholder "Enter or select email"}]
+     [:datalist {:id "email-list"}]
+     [:button {:type "button" :id "custom-button"} "Send"]]
+    ]
   [:script
-     "document.getElementById('file-trace').addEventListener('change', function(event) {
+     "fetch('/emails')  
+      .then(response => response.json())
+      .then(data => {
+          const emailList = document.getElementById('email-list');
+          data.emails.forEach(email => {
+              const option = document.createElement('option');
+              option.value = email;
+              emailList.appendChild(option);
+          });
+      })
+      .catch(error => console.error('Error fetching email list:', error));
+      
+      document.getElementById('file-trace').addEventListener('change', function(event) {
           document.getElementById('file-name').textContent = event.target.files[0].name;
       });
       document.getElementById('trace-form').onsubmit = function(event) {

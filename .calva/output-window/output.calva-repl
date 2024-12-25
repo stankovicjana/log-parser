@@ -853,3 +853,52 @@ clj꞉sample.logs꞉> 
 ; ju
 ; error
 ; 
+; File updated: C:\new\korisnicki zahtev za neki sistem ko.txt
+; File updated: C:\new\korisnicki zahtev za neki sistem ko.txt
+; File content read: korisnicki zahtev za neki sistem koji ja budem zelela, teksualni programski zahtev na osnovu toga konceptualni model, 
+; nakon toga da se javim da entity model za taj konceptualni model i da na
+; osnovu toga 
+; File updated: C:\new\korisnicki zahtev za neki sistem ko.txt
+; File updated: C:\new\korisnicki zahtev za neki sistem ko.txt
+; File updated: C:\new\korisnicki zahtev za neki sistem ko.txt
+; File content read: korisnicki zahtev za neki sistem koji ja budem zelela, teksualni programski zahtev na osnovu toga konceptualni model, 
+; nakon toga da se javim da entity model za taj konceptualni model i da na
+; osnovu toga 
+; File updated: C:\new\korisnicki zahtev za neki sistem ko.txt
+; File content read: korisnicki zahtev za neki sistem koji ja budem zelela, teksualni programski zahtev na osnovu toga konceptualni model, 
+; nakon toga da se javim da entity model za taj konceptualni model i da na
+; osnovu toga 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
+; File updated: C:\new\test.txt
+; File content read: export
+; ju
+; error
+; 
+; Error detected in file! Updated content:
+; export
+; ju
+; error
+; 
