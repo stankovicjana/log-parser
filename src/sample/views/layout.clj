@@ -11,9 +11,9 @@
 (defn user-menu [user]
   [:ul {:class "nav navbar-nav navbar-right"}
    [:li
-    [:a {:class "trace" :href "/trace"} "Trace files"]]
+    [:a {:class "trace" :href "/trace"} "Trace logs"]]
    [:li
-    [:a {:class "upload" :href "/upload"} "Upload and parse file"]]
+    [:a {:class "upload" :href "/upload"} "Parse logs"]]
    [:li
     [:a {:class "logout" :href "/logout"} "Logout"]]])
 (defn base [& content]

@@ -5,6 +5,18 @@
 (defn trace-page [user]
   (let [user-id (:id user)]
   [:div.content
+   [:p "This tool helps you trace errors in your important files. 
+        Firstly, select the email you want the warning message to be sent to in case of an error.
+        Choose from the list or enter new email.
+        Secondly, choose wanted log from file system.
+        If error occurs, message will be sent to your email"]
+   [:div
+    [:h4 "Enter email to notify if error occurs"]
+    [:div {:id "upload-div"}
+     [:input {:list "email-list" :id "custom-textbox" :placeholder "Enter or select email"}]
+     [:datalist {:id "email-list"}]
+     [:div {:id "submit-div"}
+      [:button {:type "button" :id "add-button"} "Add friend"]]]]
    [:h2 "Choose the log you want to trace:"]
    [:form {:id "trace-form" :action "/trace" :method "post" :enctype "multipart/form-data"}
     [:div {:id "trace-div"}
@@ -16,15 +28,6 @@
      [:button {:type "submit" :id "trace-btn"} "Trace file"]
      [:button {:type "submit" :id "cancel-btn"} "Cancel tracing"]]]
     [:div {:id "response-message" :style {:margin-top "20px"}}]]
-    [:div
-     [:h2 "Enter email to notify if error occurs"]
-     [:div {:id "upload-div"}
-     [:input {:list "email-list" :id "custom-textbox" :placeholder "Enter or select email"}]
-     [:datalist {:id "email-list"}]
-     [:div {:id "submit-div"}
-     [:button {:type "button" :id "add-button"} "Add friend"]
-     [:button {:type "button" :id "custom-button"} "Send"]]]
-    ]
   [:script
    (str "var userId = " user-id ";")
    "document.getElementById('add-button').addEventListener('click', function() {

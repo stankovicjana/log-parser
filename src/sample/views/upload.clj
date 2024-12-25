@@ -2,6 +2,10 @@
 (defn upload-page [user]
   (let [user-id (:id user)]
     [:div.content
+     [:p "This tool helps you parse complicated and long logs and analyse them.
+          When log is uploaded, you instantly see lines that have error, considering they are red.
+          There is option to mark line yellow by clicking on it.
+          You can also select part of the log and send it to the person of interest for further analyzation."]
      [:h2 "Upload your file here:"]
      [:form {:id "upload-form" :action "/upload" :method "post" :enctype "multipart/form-data"}
       [:div {:id "upload-div"}
