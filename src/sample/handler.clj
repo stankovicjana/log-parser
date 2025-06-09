@@ -22,13 +22,13 @@
    [sample.views.layout :as layout]
    [sample.views.trace :as view]
    [sample.views.upload :refer [upload-page]]
-   [ring.middleware.cors :refer [wrap-cors]])
-  )
+   [ring.middleware.cors :refer [wrap-cors]]
+   [sample.logs :refer [watch-file]]))
 
 (defn send-email [email log-content]
   (trace/trace "Sending email to:" email)
 
-    (let [log-file "C:\\Users\\stank\\OneDrive\\Documents\\User.txt"
+  (let [log-file "C:\\Users\\stank\\OneDrive\\Documents\\User.txt"
         log-file-content (str log-content)]
     (trace/trace "Type of log-file-content:" (type log-file-content))
     (trace/trace "Type of log-file:" (type log-file))
@@ -56,8 +56,8 @@
 (defn send-email-handler [request]
   (let [email (get-in request [:multipart-params "email"])
         log-content (get-in request [:multipart-params "logContent"])
-        subject "Log File" 
-        body "Hi, please check out these logs" 
+        subject "Log File"
+        body "Hi, please check out these logs"
         tmp-file (java.io.File/createTempFile "log-content-" ".txt")]
     (if (and email log-content)
       (do
@@ -87,29 +87,19 @@
     (let [user-id (:user-id (:session request))]
       (handler (assoc request :user-id user-id)))))
 
-(defn start-trace-handler [request]
-  (let [file (get-in request [:params "file"])]
-              (trace/trace "Request params:" file)
-    (if file
-      (try
-        (let [filename (:filename file)
-              tempfile (:tempfile file)
-              size (:size file)]
-          (let [destination (str "C:/new/" filename)]
-            (io/copy tempfile (io/file destination))
-            (trace/trace "Request desct:" destination)
-            (watch-file destination)
-            (response/response (json/generate-string {:status "success"
-                                                      :message (str "File " filename " uploaded and is being monitored.")
-                                                      :file filename}))))
-        (catch Exception e
-          (println "Error processing file:" (.getMessage e))
-          (response/response (json/generate-string {:status "failed"
-                                                    :message "Error occured. Failed to trace log"}
-                                                    ))))
-      (response/response "No file uploaded"))))
-
 (def clients (atom {}))
+(defn start-trace-handler [request]
+  (let [body (slurp (:body request))
+        {:keys [path]} (json/parse-string body true)]
+    (if (and path (.exists (io/file path)))
+      (do
+        (watch-file path clients)
+        (response/response (json/generate-string
+                            {:status "success"
+                             :message (str "Started watching: " path)})))
+      (response/response (json/generate-string
+                          {:status "failed"
+                           :message "Invalid or non-existing file path"})))))
 
 (defn websocket-handler [req]
   (with-channel req channel
@@ -124,7 +114,6 @@
                       (println "Received data from client:" data)
                       (send! channel (json/generate-string {:status "received"
                                                             :message "Message received"}))))
-
         (on-close channel
                   (fn [status]
                     (println "WebSocket connection closed, status:" status)
@@ -142,8 +131,7 @@
          (trace (get-user user-id))
          (response/redirect "/login")))
      (GET "/emails" [] (fetch-friends (get-user user-id)))
-     (POST "/add-friend" request (add-friend request))
-     )))
+     (POST "/add-friend" request (add-friend request)))))
 
 (defroutes app-routes
   (POST "/upload" request
@@ -162,7 +150,7 @@
       (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
                  :access-control-allow-headers ["Content-Type"]
                  :access-control-allow-methods [:get :post :options])
-      (wrap-multipart-params) 
+      (wrap-multipart-params)
       (wrap-params)
       (wrap-session)
       (wrap-resource "public")))

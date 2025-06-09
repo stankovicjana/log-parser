@@ -1,7 +1,6 @@
 (ns sample.views.trace
   (:require [hiccup.page :refer [html5 include-css]]
             [hiccup.element :refer [link-to]]))
-
 (defn trace-page [user]
   (let [user-id (:id user)]
     [:div.content
@@ -21,75 +20,67 @@
      [:form {:id "trace-form"}
       [:div {:id "trace-div"}
        [:div
-        [:input {:id "file-trace" :type "file" :name "file" :style "display:none;"}]
-        [:label {:for "file-trace" :class "custom-file-upload"} "Choose File"]
-        [:span {:id "file-name"} "No file chosen"]]
-       [:div {:id "submit-div"}
-        [:button {:type "button" :id "trace-btn"} "Start Tracing"]
-        [:button {:type "button" :id "cancel-btn"} "Cancel tracing"]]]
+        [:h4 "Enter full path to an existing log file on the server"]
+        [:input {:type "text" :id "file-path" :placeholder "E.g. C:/Users/Jana/Desktop/log.txt"}]
+        [:button {:type "button" :id "watch-path-btn"} "Start Watching This Path"]]]
       [:div {:id "response-message" :style {:margin-top "20px"}}]]
      [:script
-      (str "var userId = " user-id ";")
-      "const socket = new WebSocket('http://localhost:3000/ws');
-
-      socket.onopen = () => console.log('WebSocket connected');
-
-      socket.onmessage = (event) => {
-          console.log('Message from server:', event.data);
+      (str "var userId = " user-id ";") "const socket = new WebSocket('http://localhost:3000/ws');
+            socket.onopen = () => console.log('WebSocket connected');
+            socket.onmessage = (event) => {
+          const data = JSON.parse(event.data);
+      
+          if (data.alert) {
+              alert('error detected' + data.message);
+          }
+          document.getElementById('response-message').textContent = data.content;
       };
-
-      document.getElementById('add-button').addEventListener('click', function() {
-          const email = document.getElementById('custom-textbox').value;  
-          if (email) {
-              fetch('/add-friend', {
+            document.getElementById('add-button').addEventListener('click', function() {
+                const email = document.getElementById('custom-textbox').value;  
+                if (email) {
+                    fetch('/add-friend', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, user_id: userId })
+                    })
+                    .then(response => response.json())
+                    .then(data => alert('Friend added successfully!'))
+                    .catch(error => alert('Failed to add friend.'));
+                } else {
+                    alert('Please enter an email to add a friend.');
+                }
+            });
+      
+          document.getElementById('watch-path-btn').addEventListener('click', function () {
+          const path = document.getElementById('file-path').value;
+      
+          if (path) {
+              fetch('/trace', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ email, user_id: userId })
+                  body: JSON.stringify({ path: path })
               })
               .then(response => response.json())
-              .then(data => alert('Friend added successfully!'))
-              .catch(error => alert('Failed to add friend.'));
+              .then(data => {
+                  alert(data.message || 'Started watching the file.');
+              })
+              .catch(error => {
+                  console.error('Error starting watch:', error);
+                  alert('Error starting file watch.');
+              });
           } else {
-              alert('Please enter an email to add a friend.');
+              alert('Please enter a valid file path.');
           }
       });
-
-      document.getElementById('file-trace').addEventListener('change', function(event) {
-          const file = event.target.files[0];
-          document.getElementById('file-name').textContent = file ? file.name : 'No file chosen';
-
-          if (file) {
-              const reader = new FileReader();
-              let lastContent = '';
-
-              const monitorFile = () => {
-                  reader.onload = () => {
-                      const currentContent = reader.result;
-                      if (currentContent !== lastContent) {
-                          lastContent = currentContent;
-                          socket.send(JSON.stringify({
-                              fileName: file.name,
-                              content: currentContent
-                          }));
-                          console.log('File updated and sent to server:', file.name);
-                      }
-                  };
-                  reader.readAsText(file);
-              };
-
-              setInterval(monitorFile, 5000);
-          }
-      });
-
-      fetch('/emails')  
-      .then(response => response.json())
-      .then(data => {
-          const emailList = document.getElementById('email-list');
-          data.emails.forEach(email => {
-              const option = document.createElement('option');
-              option.value = email;
-              emailList.appendChild(option);
-          });
-      })
-      .catch(error => console.error('Error fetching email list:', error));
-      "]]))
+            fetch('/emails')  
+            .then(response => response.json())
+            .then(data => {
+                const emailList = document.getElementById('email-list');
+                data.emails.forEach(email => {
+                    const option = document.createElement('option');
+                    option.value = email;
+                    emailList.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching email list:', error));
+            "]]))

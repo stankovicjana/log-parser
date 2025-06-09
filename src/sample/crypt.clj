@@ -7,4 +7,4 @@
 (defn verify [string encrypted]
   (boolean
    (if (and string encrypted)
-    (sc/verify string encrypted))))
+     (sc/verify string encrypted))))

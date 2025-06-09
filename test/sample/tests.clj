@@ -29,7 +29,7 @@
                            :bcc javax.mail.Message$RecipientType/BCC)
                          (javax.mail.internet.InternetAddress. recipient)))))
 
-    
+
     (when subject
       (.setSubject jmsg subject))
 
@@ -76,7 +76,7 @@
                   (.put "mail.smtp.starttls.enable" (str (:tls mail-settings)))
                   (.put "mail.smtp.host" (:host mail-settings))
                   (.put "mail.smtp.port" (str (:port mail-settings)))
-                  (.put "mail.smtp.auth" "true")) 
+                  (.put "mail.smtp.auth" "true"))
           session (javax.mail.Session/getInstance props
                                                   (proxy [javax.mail.Authenticator] []
                                                     (getPasswordAuthentication []
@@ -97,12 +97,12 @@
           (println "Error sending email:" (.getMessage e))
           (println "Stack trace:")
           (.printStackTrace e))))))
-  
+
 (def email-data {:from (System/getenv "SMTP_USER")
-                   :to "stankovicjana000@gmail.com"
-                   :subject "Test Email"
-                   :body "This is a test email."})
-  
+                 :to "stankovicjana000@gmail.com"
+                 :subject "Test Email"
+                 :body "This is a test email."})
+
 (def mail-settings {:host (System/getenv "SMTP_HOST")
                     :port 587
                     :user (System/getenv "SMTP_USER")
@@ -113,5 +113,4 @@
 (def email-data {:from (System/getenv "SMTP_USER")
                  :to ["recipient@example.com"]
                  :subject "Test Email"
-                 :body "This is a test email body."
-                 }) 
+                 :body "This is a test email body."}) 

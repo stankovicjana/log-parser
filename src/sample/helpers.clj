@@ -8,9 +8,9 @@
             [clojure.string :as str]
             [postal.core :refer [send-message]]
             [postal.message :as msg])
-(:import
-  [java.net Socket]
-  [java.nio.file Files Paths]))
+  (:import
+   [java.net Socket]
+   [java.nio.file Files Paths]))
 
 (defn get-user [id]
   (if id
@@ -87,7 +87,7 @@
                   (.put "mail.smtp.starttls.enable" (str (:tls mail-settings)))
                   (.put "mail.smtp.host" (:host mail-settings))
                   (.put "mail.smtp.port" (str (:port mail-settings)))
-                  (.put "mail.smtp.auth" "true")) 
+                  (.put "mail.smtp.auth" "true"))
           session (javax.mail.Session/getInstance props
                                                   (proxy [javax.mail.Authenticator] []
                                                     (getPasswordAuthentication []

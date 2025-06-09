@@ -17,7 +17,7 @@
 
 (defn registration-page [& [email errors]]
   (layout/common
-   (view/registration-page email errors))) 
+   (view/registration-page email errors)))
 
 (defn user-to-session [user]
   {:user-id (:id user)

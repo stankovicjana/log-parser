@@ -8,7 +8,7 @@
   (string/split-lines (slurp filename)))
 
 (defn parse-line [line]
-  (let [regex #"(.*)\s+\[(.*)\]\s+(.*)"  
+  (let [regex #"(.*)\s+\[(.*)\]\s+(.*)"
         match (re-matches regex line)]
     (if match
       (let [owner (string/trim (nth match 2))]
@@ -23,8 +23,8 @@
 ;filter ? uklanja nil vrednosti, ostavljajući samo uspešno parsirane linije.
 (defn parse-lines [lines]
   (->> lines
-       (map parse-line)  
-       (filter some?)))  
+       (map parse-line)
+       (filter some?)))
 
 (defn process-logfile [filename]
   (parse-lines (logfile-lines filename)))
