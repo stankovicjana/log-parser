@@ -27,11 +27,15 @@
      [:script
       (str "var userId = " user-id ";") "const socket = new WebSocket('http://localhost:3000/ws');
             socket.onopen = () => console.log('WebSocket connected');
-            socket.onmessage = (event) => {
+      socket.onmessage = (event) => {
           const data = JSON.parse(event.data);
-      
+
+          if (data.status === 'ok' && data.message === 'Email registered') {
+             console.log('Email registered successfully.');
+              return;
+          }
           if (data.alert) {
-              alert('error detected' + data.message);
+              alert('Error detected: ' + data.message);
           }
           document.getElementById('response-message').textContent = data.content;
       };
@@ -51,27 +55,38 @@
                 }
             });
       
-          document.getElementById('watch-path-btn').addEventListener('click', function () {
-          const path = document.getElementById('file-path').value;
-      
-          if (path) {
-              fetch('/trace', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ path: path })
-              })
-              .then(response => response.json())
-              .then(data => {
-                  alert(data.message || 'Started watching the file.');
-              })
-              .catch(error => {
-                  console.error('Error starting watch:', error);
-                  alert('Error starting file watch.');
-              });
-          } else {
-              alert('Please enter a valid file path.');
-          }
-      });
+         document.getElementById('watch-path-btn').addEventListener('click', function () {
+        const path = document.getElementById('file-path').value;
+        const email = document.getElementById('custom-textbox').value;
+
+       if (!email) {
+            alert('Please enter your email address first.');
+            return;
+        }
+
+        socket.send(JSON.stringify({
+            type: 'register',
+            email: email
+        }));
+
+        if (path) {
+            fetch('/trace', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ path: path })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || 'Started watching the file.');
+            })
+            .catch(error => {
+                console.error('Error starting watch:', error);
+                alert('Error starting file watch.');
+            });
+        } else {
+            alert('Please enter a valid file path.');
+        }
+    });
             fetch('/emails')  
             .then(response => response.json())
             .then(data => {

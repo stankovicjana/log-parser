@@ -100,57 +100,63 @@
       (response/response (json/generate-string
                           {:status "failed"
                            :message "Invalid or non-existing file path"})))))
-
 (defn websocket-handler [req]
   (with-channel req channel
     (if-not channel
       (println "Channel is nil — something's wrong (this shouldn't happen)")
       (do
         (println "WebSocket connection established.")
-        (swap! clients assoc channel true)
-
+        (swap! clients assoc channel {:email nil :file nil})
         (on-receive channel
                     (fn [data]
-                      (println "Received data from client:" data)
-                      (send! channel (json/generate-string {:status "received"
-                                                            :message "Message received"}))))
+                      (let [{:keys [type email]} (json/parse-string data true)]
+                        (cond
+                          (= type "register")
+                          (do
+                            (println "Registered email for channel:" email)
+                            (swap! clients assoc channel {:email email})
+                            (send! channel (json/generate-string {:status "ok" :message "Email registered"})))
+
+                          :else
+                          (send! channel (json/generate-string {:status "error" :message "Unknown message type"}))))))
         (on-close channel
                   (fn [status]
                     (println "WebSocket connection closed, status:" status)
                     (swap! clients dissoc channel)))))))
 
-(defroutes private-routes
-  (wrap-current-user-id
-   (context "" {:keys [user-id]}
-     (GET "/upload" []
-       (if user-id
-         (upload (get-user user-id))
-         (response/redirect "/login")))
-     (GET "/trace" []
-       (if user-id
-         (trace (get-user user-id))
-         (response/redirect "/login")))
-     (GET "/emails" [] (fetch-friends (get-user user-id)))
-     (POST "/add-friend" request (add-friend request)))))
 
-(defroutes app-routes
-  (POST "/upload" request
-    (upload-file-handler request))
-  (POST "/trace" request
-    (start-trace-handler request))
-  (POST "/send-email" request (send-email-handler request))
-  (GET "/ws" request
-    (websocket-handler request))
-  auth-routes
-  home-routes
-  private-routes)
+  (defroutes private-routes
+    (wrap-current-user-id
+     (context "" {:keys [user-id]}
+       (GET "/upload" []
+         (if user-id
+           (upload (get-user user-id))
+           (response/redirect "/login")))
+       (GET "/trace" []
+         (if user-id
+           (trace (get-user user-id))
+           (response/redirect "/login")))
+       (GET "/emails" [] (fetch-friends (get-user user-id)))
+       (POST "/add-friend" request (add-friend request)))))
 
-(def app
-  (-> (routes app-routes)
-      (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
-                 :access-control-allow-headers ["Content-Type"]
-                 :access-control-allow-methods [:get :post :options])
-      (wrap-multipart-params)
-      (wrap-params)
-      (wrap-session)
-      (wrap-resource "public")))
+  (defroutes app-routes
+    (POST "/upload" request
+      (upload-file-handler request))
+    (POST "/trace" request
+      (start-trace-handler request))
+    (POST "/send-email" request (send-email-handler request))
+    (GET "/ws" request
+      (websocket-handler request))
+    auth-routes
+    home-routes
+    private-routes)
+
+  (def app
+    (-> (routes app-routes)
+        (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
+                   :access-control-allow-headers ["Content-Type"]
+                   :access-control-allow-methods [:get :post :options])
+        (wrap-multipart-params)
+        (wrap-params)
+        (wrap-session)
+        (wrap-resource "public")))
