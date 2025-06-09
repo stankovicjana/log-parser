@@ -8,11 +8,11 @@
    [sample.db :refer :all]))
 
 (defn fetch-friends [user-id]
-  (trace/trace "doslo:" user-id)
+  (trace/trace "requst:" user-id)
   (let [user-id-value (:id user-id) 
         friends (jdbc/query db
                             ["SELECT f.friend_email FROM friends f WHERE f.user_id = ?" user-id-value])]
-    (trace/trace "prijatelji:" friends) 
+    (trace/trace "friends:" friends) 
     (response/response
      (json/generate-string
        {:emails (map :friend_email friends)}))))

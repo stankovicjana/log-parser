@@ -29,19 +29,16 @@
                            :bcc javax.mail.Message$RecipientType/BCC)
                          (javax.mail.internet.InternetAddress. recipient)))))
 
-    ;; Set the subject
+    
     (when subject
       (.setSubject jmsg subject))
 
-    ;; Add attachments
     (when attachments
       (let [multipart (javax.mail.internet.MimeMultipart.)]
-        ;; Add the main body part
         (let [body-part (javax.mail.internet.MimeBodyPart.)]
           (.setText body-part (:body email-data))
           (.addBodyPart multipart body-part))
 
-        ;; Add each attachment
         (doseq [attachment attachments]
           (let [attachment-part (javax.mail.internet.MimeBodyPart.)
                 data-source (javax.mail.util.ByteArrayDataSource.
@@ -52,7 +49,6 @@
             (.setFileName attachment-part (:file-name attachment))
             (.addBodyPart multipart attachment-part)))
 
-        ;; Set the content of the message
         (.setContent jmsg multipart))))
   jmsg)
 (defn send-email-with-attachment
@@ -76,22 +72,18 @@
          :pass (System/getenv "SMTP_APP_PASSWORD")
          :tls true}]
 
-    ;; Set SMTP properties
     (let [props (doto (java.util.Properties.)
                   (.put "mail.smtp.starttls.enable" (str (:tls mail-settings)))
                   (.put "mail.smtp.host" (:host mail-settings))
                   (.put "mail.smtp.port" (str (:port mail-settings)))
-                  (.put "mail.smtp.auth" "true")) ;; Authenticates with the provided user and pass
-          ;; Get the session with authentication
+                  (.put "mail.smtp.auth" "true")) 
           session (javax.mail.Session/getInstance props
                                                   (proxy [javax.mail.Authenticator] []
                                                     (getPasswordAuthentication []
                                                       (javax.mail.PasswordAuthentication. (:user mail-settings) (:pass mail-settings)))))
-          ;; Create a new MimeMessage
           jmsg (javax.mail.internet.MimeMessage. session)]
 
       (try
-        ;; Log SMTP properties and email data
         (println "SMTP Properties:" props)
         (println "Email data:" email-data)
 

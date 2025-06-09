@@ -1,5 +1,6 @@
 (ns sample.handler
   (:require
+   [org.httpkit.server :refer [with-channel on-receive send! on-close]]
    [cheshire.core :as json]
    [clojure.java.io :as io]
    [clojure.tools.logging :as log]
@@ -20,18 +21,19 @@
    [sample.routes.home :refer [home-routes]]
    [sample.views.layout :as layout]
    [sample.views.trace :as view]
-   [sample.views.upload :refer [upload-page]])
+   [sample.views.upload :refer [upload-page]]
+   [ring.middleware.cors :refer [wrap-cors]])
   )
 
 (defn send-email [email log-content]
   (trace/trace "Sending email to:" email)
 
-  (let [log-file "C:\\Users\\stank\\OneDrive\\Documents\\User.txt"
-        log-file-content (str log-content)]  
+    (let [log-file "C:\\Users\\stank\\OneDrive\\Documents\\User.txt"
+        log-file-content (str log-content)]
     (trace/trace "Type of log-file-content:" (type log-file-content))
-    (trace/trace "Type of log-file:" (type log-file)) 
-    (trace/trace "Log file content:" log-file-content) 
-(trace/trace "Log file content:" log-file-content)
+    (trace/trace "Type of log-file:" (type log-file))
+    (trace/trace "Log file content:" log-file-content)
+    (trace/trace "Log file content:" log-file-content)
 
     (let [mail-settings {:host (System/getenv "SMTP_HOST")
                          :port 587
@@ -44,7 +46,7 @@
                       :body "Please find the selected logs attached."
                       :attachments [{:content "Test log content directly inserted into email"
                                      :type "text/plain"
-                                     :name "log.txt"}]}]  
+                                     :name "log.txt"}]}]
       (try
         (postal/send-message mail-settings email-data)
         (log/info "Email sent successfully.")
@@ -85,7 +87,6 @@
     (let [user-id (:user-id (:session request))]
       (handler (assoc request :user-id user-id)))))
 
-
 (defn start-trace-handler [request]
   (let [file (get-in request [:params "file"])]
               (trace/trace "Request params:" file)
@@ -103,8 +104,31 @@
                                                       :file filename}))))
         (catch Exception e
           (println "Error processing file:" (.getMessage e))
-          (response/response "An error occurred while processing the file.")))
+          (response/response (json/generate-string {:status "failed"
+                                                    :message "Error occured. Failed to trace log"}
+                                                    ))))
       (response/response "No file uploaded"))))
+
+(def clients (atom {}))
+
+(defn websocket-handler [req]
+  (with-channel req channel
+    (if-not channel
+      (println "Channel is nil — something's wrong (this shouldn't happen)")
+      (do
+        (println "WebSocket connection established.")
+        (swap! clients assoc channel true)
+
+        (on-receive channel
+                    (fn [data]
+                      (println "Received data from client:" data)
+                      (send! channel (json/generate-string {:status "received"
+                                                            :message "Message received"}))))
+
+        (on-close channel
+                  (fn [status]
+                    (println "WebSocket connection closed, status:" status)
+                    (swap! clients dissoc channel)))))))
 
 (defroutes private-routes
   (wrap-current-user-id
@@ -127,14 +151,18 @@
   (POST "/trace" request
     (start-trace-handler request))
   (POST "/send-email" request (send-email-handler request))
+  (GET "/ws" request
+    (websocket-handler request))
   auth-routes
   home-routes
   private-routes)
 
 (def app
   (-> (routes app-routes)
+      (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
+                 :access-control-allow-headers ["Content-Type"]
+                 :access-control-allow-methods [:get :post :options])
       (wrap-multipart-params) 
       (wrap-params)
       (wrap-session)
       (wrap-resource "public")))
-

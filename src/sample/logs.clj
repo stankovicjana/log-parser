@@ -19,5 +19,3 @@
                 (println "File updated:" updated-file))))
           (.reset key)
           (recur))))))
-
-(watch-file"C:/new/test.txt")
