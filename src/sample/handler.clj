@@ -1,12 +1,13 @@
 (ns sample.handler
   (:require
-   [org.httpkit.server :refer [with-channel on-receive send! on-close]]
    [cheshire.core :as json]
    [clojure.java.io :as io]
    [clojure.tools.logging :as log]
    [clojure.tools.trace :as trace]
    [compojure.core :refer [context defroutes GET POST routes]]
+   [org.httpkit.server :refer [on-close on-receive send! with-channel]]
    [postal.core :as postal]
+   [ring.middleware.cors :refer [wrap-cors]]
    [ring.middleware.multipart-params :refer [wrap-multipart-params]]
    [ring.middleware.params :refer [wrap-params]]
    [ring.middleware.resource :refer [wrap-resource]]
@@ -15,15 +16,15 @@
    [sample.helpers :refer [get-user]]
    [sample.helpers :refer [send-email-with-attachment]]
    [sample.logs :refer [watch-file]]
+   [sample.logs :refer [watch-file]]
    [sample.models.friends :refer [add-friend fetch-friends]]
    [sample.parser :refer [process-logfile]]
    [sample.routes.auth :refer [auth-routes]]
-   [sample.routes.home :refer [home-routes]]
+   [sample.routes.friends :refer [friends-routes]]
+   [sample.views.home :refer [home-page]]
    [sample.views.layout :as layout]
    [sample.views.trace :as view]
-   [sample.views.upload :refer [upload-page]]
-   [ring.middleware.cors :refer [wrap-cors]]
-   [sample.logs :refer [watch-file]]))
+   [sample.views.upload :refer [upload-page]]))
 
 (defn send-email [email log-content]
   (trace/trace "Sending email to:" email)
@@ -82,6 +83,9 @@
 (defn trace [user]
   (layout/common (view/trace-page user) user))
 
+(defn home [user]
+  (layout/common (home-page user) user))
+
 (defn wrap-current-user-id [handler]
   (fn [request]
     (let [user-id (:user-id (:session request))]
@@ -132,12 +136,17 @@
          (if user-id
            (upload (get-user user-id))
            (response/redirect "/login")))
+       (GET "/home" []
+         (if user-id
+           (home (get-user user-id))
+           (response/redirect "/login")))
        (GET "/trace" []
          (if user-id
            (trace (get-user user-id))
            (response/redirect "/login")))
        (GET "/emails" [] (fetch-friends (get-user user-id)))
-       (POST "/add-friend" request (add-friend request)))))
+       (POST "/add-friend" request (add-friend request)))
+     ))
 
   (defroutes app-routes
     (POST "/upload" request
@@ -148,12 +157,12 @@
     (GET "/ws" request
       (websocket-handler request))
     auth-routes
-    home-routes
+    friends-routes
     private-routes)
 
   (def app
     (-> (routes app-routes)
-        (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
+        (wrap-cors :access-control-allow-origin [#"http://localhost:3000/"]
                    :access-control-allow-headers ["Content-Type"]
                    :access-control-allow-methods [:get :post :options])
         (wrap-multipart-params)

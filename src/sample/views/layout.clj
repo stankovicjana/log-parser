@@ -11,6 +11,8 @@
 (defn user-menu [user]
   [:ul {:class "nav navbar-nav navbar-right"}
    [:li
+    [:a {:class "home" :href "/home"} "Home"]]
+   [:li
     [:a {:class "trace" :href "/trace"} "Trace logs"]]
    [:li
     [:a {:class "upload" :href "/upload"} "Parse logs"]]
@@ -34,9 +36,8 @@
     [:nav
      [:div.navbar-header
       [:a.navbar-brand {:href "/" :class "navbar-link"} ""]]
-     (if user
-       (do
-         (user-menu user)) 
-       (guest-menu))]]
+    (if user
+      (user-menu user)
+      (guest-menu))]]
    [:div {:class ""} content]
    (include-js "/js/upload.js")))

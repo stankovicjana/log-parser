@@ -3,12 +3,13 @@
    [compojure.core :refer :all]
    [hiccup.form :refer :all]
    [postal.core :refer [send-message]]
-   [ring.util.response :as response]
+   [ring.util.response :as response :refer [redirect]]
    [sample.crypt :as crypt]
    [sample.helpers :refer :all]
    [sample.models.user :as db]
-   [sample.views.layout :as layout]
+   [sample.routes.home :as home]
    [sample.views.auth :as view]
+   [sample.views.layout :as layout]
    [struct.core :as st]))
 
 (defn login-page [& [email errors]]
@@ -27,7 +28,7 @@
 (defn handle-login [email password]
   (let [user (db/get-user-by-email email)]
     (if (and user (crypt/verify password (:encrypted_password user)))
-      (assoc (response/redirect "/upload") :session (user-to-session user))
+      (assoc (response/redirect "/home") :session (user-to-session user))
       (login-page email {:email "Email or password is invalid"}))))
 
 (defn handle-logout []
@@ -74,4 +75,6 @@
   (POST "/register" [name email password password-confirmation]
     (handle-registration name email password password-confirmation))
   (GET "/users" []
-    (response/response (db/get-all-users)))) 
+    (response/response (db/get-all-users)))
+  (GET "/" [] (redirect "/login"))
+) 

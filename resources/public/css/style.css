@@ -1,79 +1,148 @@
-
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
-  
-  nav ul {
-    list-style: none;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333652;
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 10px;
-    float: left;
-  }
-  
-  h1 {
-    color: #333652;
-  }
-  
-  p {
-    color: #555;
-  }
-  
-  nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-    nav li a:hover {
-    background-color: #111;
-  }
-
-.container {
-    display: flex; 
-    height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
-.sidebar {
-    width: 15%; 
-    background-color: #f4f4f4; 
-    padding: 15px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+.content ul {
+  margin-left: 20px;
+  padding-left: 20px;
+  list-style-type: disc;
+  line-height: 1.8;
+  color: #333;
+}
+.content li {
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
-.content {
-    flex: 1; 
-    padding: 15px;
-    background-color: #fff; 
+h2,
+h4 {
+  color: #2c3e50;
+}
+
+input[type="text"],
+input[list] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+#submit-div {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+#trace-div {
+  margin-top: 30px;
+}
+
+#response-message {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+#custom-textbox,
+#file-path {
+  min-width: 300px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333652;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+  float: left;
 }
 
 h1 {
-    color: #333652;
+  color: #333652;
+}
+
+p {
+  color: #555;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+nav li a:hover {
+  background-color: #111;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 15%;
+  background-color: #f4f4f4;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  max-width: 800px;
+  margin: auto;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333652;
 }
 
 ul {
-    list-style-type: none; 
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 li {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 a {
-    text-decoration: none; 
-    color: black; 
+  text-decoration: none;
+  color: black;
 }
 
 a:hover {
-    text-decoration: none;  
+  text-decoration: none;
 }
 
 /*input[type="file"]{
@@ -86,21 +155,21 @@ a:hover {
     font-size: 16px;
     margin-right: 10px;
 }   */
-   
+
 button {
-    background-color: #90adc6; 
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+  background-color: #90adc6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 button:hover {
-    background-color: #e9eaec; 
+  background-color: #e9eaec;
 }
-table{
+table {
   margin-top: 30px;
   width: 100%;
   border-collapse: collapse;
@@ -108,7 +177,8 @@ table{
   font-size: 16px;
   text-align: left;
 }
-th, td {
+th,
+td {
   border: 1px solid #ddd;
 }
 
@@ -133,36 +203,34 @@ tr.selected {
 }
 
 input[type="file"] {
-  display: none; 
-}
-
-.custom-file-upload {
-  display: inline-block;
-  background-color: #e7e7e7;
-  color: #333;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-right: 10px;
-  text-align: center;
+  display: none;
 }
 
 .custom-file-upload:hover {
   background-color: #d6d6d6;
 }
-.registration-form, .login-form, .center-form {
+.registration-form,
+.login-form,
+.center-form {
   max-width: 500px;
   margin: 0 auto;
 }
-.registration-form, .login-form {
+.registration-form,
+.login-form {
   background-color: #f8f9fa;
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.login-form {
+  margin-top: 180px;
+}
+.registration-form{
+  margin-top: 80px;
 
-.registration-form h1, .login-form h1 {
+}
+.registration-form h1,
+.login-form h1 {
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
@@ -188,7 +256,7 @@ input[type="file"] {
 .btn {
   width: 100%;
   padding: 10px;
-  background-color: #fad02C;
+  background-color: #fad02c;
   border: none;
   color: white;
   font-size: 16px;
@@ -224,36 +292,134 @@ input[type="date"] {
   border-radius: 4px;
   background-color: #f9f9f9;
 }
-.trace{
+.trace {
   display: flex;
   gap: 50px;
 }
-input{
+input {
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s
+  transition: background-color 0.3s;
 }
-.sendLogs{
+.sendLogs {
   display: none;
 }
-#trace-div{
+#trace-div {
   display: flex;
   justify-content: space-between;
 }
-#submit-div{
+#submit-div {
   display: flex;
-  gap:10px
+  gap: 10px;
 }
-#cancel-btn{
-  background-color: #E12A2A;
-}
-#trace-btn{
-  background-color: #469A49;
-}
-#upload-div{
+#upload-div > div {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-file-upload,
+#upload-div button[type="submit"] {
+  width: 160px; 
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-file-upload {
+  background-color: #e7e7e7;
+  color: #333;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.custom-file-upload:hover {
+  background-color: #d6d6d6;
+}
+
+#upload-div button[type="submit"] {
+  background-color: #90adc6;
+  color: white;
+}
+
+#upload-div button[type="submit"]:hover {
+  background-color: #7d9cba;
+}
+#file-name {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.friends table {
+  width: 100%;
+  border-collapse: collapse; 
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.friends th, td {
+  padding: 3px 5px;
+  border-bottom: none;
+  border: none;
+}
+
+.friends th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #333;
+}
+
+tr.friends {
+  border-bottom: none;
+}
+
+.friends input.form-control {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.friends button {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  margin: 0px;
+  margin-bottom: 8px;
+}
+
+.friends button.save-btn {
+  background-color: #4CAF50;
+}
+
+.friends button.save-btn:hover {
+  background-color: #45a049;
+}
+
+.friends button.delete-btn {
+  background-color: #e74c3c;
+}
+
+.friends button.delete-btn:hover {
+  background-color: #c0392b;
+}
+.friends button.add-btn:hover {
+  background-color: #d5b200;
+}
+.friends button.add-btn{
+  background-color: #f1d64f;
 }

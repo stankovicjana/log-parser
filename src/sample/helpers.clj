@@ -21,10 +21,14 @@
 
 (defn input-control [type id name & [value required error]]
   [:div.form-group
-   (list
-    (label id name)
-    (if error (error-item error))
-    (type {:class "form-control" :required required} id value))])
+   [:label {:for id} name]
+   (when error (error-item error))
+   [:input {:type type
+            :id id
+            :name id
+            :value value
+            :required required
+            :class "form-control"}]])
 
 (defn add-extra [^javax.mail.Message jmsg email-data]
   "Add headers, recipients, and attachments to the message."
