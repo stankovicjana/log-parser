@@ -21,7 +21,7 @@
    [sample.parser :refer [process-logfile]]
    [sample.routes.auth :refer [auth-routes]]
    [sample.routes.friends :refer [friends-routes]]
-   [sample.views.home :refer [home-page]]
+   [sample.routes.home :as home]
    [sample.views.layout :as layout]
    [sample.views.trace :as view]
    [sample.views.upload :refer [upload-page]]))
@@ -83,9 +83,6 @@
 (defn trace [user]
   (layout/common (view/trace-page user) user))
 
-(defn home [user]
-  (layout/common (home-page user) user))
-
 (defn wrap-current-user-id [handler]
   (fn [request]
     (let [user-id (:user-id (:session request))]
@@ -138,7 +135,7 @@
            (response/redirect "/login")))
        (GET "/home" []
          (if user-id
-           (home (get-user user-id))
+           (home/home (get-user user-id))
            (response/redirect "/login")))
        (GET "/trace" []
          (if user-id
