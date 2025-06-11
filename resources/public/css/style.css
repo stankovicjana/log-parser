@@ -3,6 +3,73 @@ body {
   background-color: #f5f5f5;
   color: #333;
 }
+.profile-and-friends {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  flex: 1 1 300px;
+}
+
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.card th, .card td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.card th {
+  background-color: #f3f3f3;
+  text-align: left;
+}
+
+button.save-btn {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.add-btn {
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input.form-control {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
 .content ul {
   margin-left: 20px;
@@ -115,7 +182,7 @@ nav li a:hover {
 }
 
 .content {
-  max-width: 800px;
+  max-width: 80%;
   margin: auto;
   background-color: #fff;
   padding: 40px;
