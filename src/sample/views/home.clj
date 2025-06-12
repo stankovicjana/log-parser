@@ -19,12 +19,17 @@
     [:br]
     [:p "Use the navigation bar above to explore available features."]
     ]
-   [:div
+   [:div.profile-friends-wrapper
+    [:div.profile-card
    [:h2 "Your Profile"] 
-      [:ul
-       [:li [:strong "Name: "] (:name user)]
-       [:li [:strong "Email: "] (:email user)]]
-      [:div.friends
+     [:div.profile-info
+      [:div.row
+       [:span.label "Name:"]
+       [:span.value (:name user)]]
+      [:div.row
+       [:span.label "Email:"]
+       [:span.value (:email user)]]]]
+    [:dik.friends-card
        [:h2 "Your Friends"]
        [:table
         [:thead
@@ -35,26 +40,32 @@
          (for [[idx email] (map-indexed vector (:friends user))]
            [:tr {:key idx}
             [:td
-             [:form {:method "post" :action "/friends/update" :style "display:inline-block; margin:0;"}
+             [:form {:method "post" :action "/friends/update" :style "margin:0;"}
               (anti-forgery-field)
               [:input {:type "hidden" :name "old_email" :value email}]
               [:input.form-control {:type "text" :name "new_email" :value email}]]]
         
             [:td
-             [:form {:method "post" :action "/friends/update" :style "display:inline-block; margin-right:5px;"}
-              (anti-forgery-field)
-              [:input {:type "hidden" :name "old_email" :value email}]
-              [:input {:type "hidden" :name "new_email" :value email}]
-              [:button.save-btn {:type "submit"} "Save"]]
-        
-             [:form {:method "post" :action "/friends/delete" :style "display:inline-block;"}
-              (anti-forgery-field)
-              [:input {:type "hidden" :name "email" :value email}]
-              [:button.delete-btn {:type "submit"} "Delete"]]]])]
+             [:div {:style "display: flex; gap: 6px;"}
+              [:form {:method "post" :action "/friends/update" :style "margin: 0;"}
+               (anti-forgery-field)
+               [:input {:type "hidden" :name "old_email" :value email}]
+               [:input {:type "hidden" :name "new_email" :value email}]
+               [:button.save-btn {:type "submit"} "Save"]]
+            
+              [:form {:method "post" :action "/friends/delete" :style "margin: 0;"}
+               (anti-forgery-field)
+               [:input {:type "hidden" :name "email" :value email}]
+               [:button.delete-btn {:type "submit"} "Delete"]]]]])]
 
         [:tfoot
          [:tr
           [:form {:method "post" :action "/friends/add"}
            (anti-forgery-field)
            [:td [:input.form-control {:type "text" :name "friend_email" :placeholder "Enter new friend's email"}]]
-           [:td [:button.add-btn {:type "submit"} "Add"]]]]]]]]])
+           [:td [:button.add-btn {:type "submit"} "Add"]]]]]]]
+           
+   ]
+           
+           
+  ])

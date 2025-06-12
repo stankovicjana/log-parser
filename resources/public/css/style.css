@@ -1,38 +1,113 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
-  color: #333;
+  color: hsl(0, 0%, 20%);
 }
-.profile-and-friends {
+/* Glavni layout za raspored levo-desno */
+.profile-friends-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
-.card {
+/* Kartica za profil */
+.profile-card {
+  flex: 1 1 300px;
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  flex: 1 1 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.card table {
+/* Kartica za prijatelje */
+.friends-card {
+  flex: 2 1 500px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Unificiraj tabelu */
+.friends-card table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
-.card th, .card td {
+.friends-card th, .friends-card td {
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
-.card th {
-  background-color: #f3f3f3;
-  text-align: left;
+.friends-card th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+/* Dugmad */
+button.save-btn {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.add-btn {
+  background-color: #f1c40f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input.form-control {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.profile-info .row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 15px;
+}
+
+.profile-info .label {
+  font-weight: 600;
+  width: 60px;
+  color: #2c3e50;
+}
+
+.profile-info .value {
+  font-weight: normal;
+  color: #333;
+  word-break: break-word;
 }
 
 button.save-btn {
@@ -239,7 +314,7 @@ button:hover {
 table {
   margin-top: 30px;
   width: 100%;
-  border-collapse: collapse;
+  border:none;
   margin: 20px 0;
   font-size: 16px;
   text-align: left;

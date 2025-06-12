@@ -17,6 +17,7 @@
    [sample.helpers :refer [send-email-with-attachment]]
    [sample.logs :refer [watch-file]]
    [sample.logs :refer [watch-file]]
+   [sample.models.emails :refer [save-sent-email!]]
    [sample.models.friends :refer [add-friend fetch-friends]]
    [sample.parser :refer [process-logfile]]
    [sample.routes.auth :refer [auth-routes]]
@@ -24,7 +25,8 @@
    [sample.routes.home :as home]
    [sample.views.layout :as layout]
    [sample.views.trace :as view]
-   [sample.views.upload :refer [upload-page]]))
+   [sample.views.upload :refer [upload-page]]
+   [sample.db :refer :all]))
 
 (defn send-email [email log-content]
   (trace/trace "Sending email to:" email)
@@ -54,7 +56,9 @@
         (catch Exception e
           (log/error e "Failed to send email"))))))
 
-(defn send-email-handler [request]
+;; ovo je ranije bilo
+
+(defn send-email-handler-old [request]
   (let [email (get-in request [:multipart-params "email"])
         log-content (get-in request [:multipart-params "logContent"])
         subject "Log File"
@@ -66,6 +70,24 @@
         (send-email-with-attachment email subject body (.getAbsolutePath tmp-file))
         (response/response "Email sent successfully!"))
       (response/response "Missing email or log content"))))
+;; ovo je ranije bilo
+
+(defn send-email-handler [request]
+  (let [email (get-in request [:multipart-params "email"])
+        log-content (get-in request [:multipart-params "logContent"])
+        user-id (get-in request [:session :user-id])
+        subject "Log File"
+        body "Hi, please check out these logs"
+        tmp-file (java.io.File/createTempFile "log-content-" ".txt")]
+
+    (if (and email log-content user-id)
+      (do
+        (spit tmp-file log-content)
+        (send-email-with-attachment email subject body (.getAbsolutePath tmp-file))
+        (save-sent-email! user-id email subject log-content)
+        (response/response "Email sent and saved successfully!"))
+      (response/response "Missing email, log content, or user session."))))
+
 
 (defn upload-file-handler [request]
   (trace/trace "Request params:" (get-in request [:params "file"]))
